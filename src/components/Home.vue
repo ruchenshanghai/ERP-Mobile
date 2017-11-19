@@ -3,7 +3,7 @@
     <v-header :user="user"></v-header>
     <div class="content">
       <transition name="move" mode="out-in">
-        <router-view :user="user" @resLogin="resLogin"></router-view>
+        <router-view :user="user" @resLoginUser="resLogin"></router-view>
       </transition>
     </div>
   </div>
@@ -16,11 +16,12 @@
       return {
         user: {
           isLogin: false,
-          userName: 'unknown',
+          validateUrl: '/staff/validate',
+          userName: '',
+          name: 'need login',
           userPassword: '',
-          menus: {
-            a: '123'
-          }
+          email: '',
+          mobil: ''
         }
       }
     },
@@ -31,13 +32,10 @@
       resLogin (resUser) {
         this.user.isLogin = true
         this.user.userName = resUser.userName
+        this.user.name = resUser.name
         this.user.userPassword = resUser.userPassword
         this.user.email = resUser.email
         this.user.mobile = resUser.mobile
-        this.user.menus = {
-          a: '123',
-          b: '456'
-        }
       }
     }
   }

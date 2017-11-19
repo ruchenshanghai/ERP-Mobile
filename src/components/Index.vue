@@ -1,0 +1,182 @@
+<template>
+  <div>
+    <template v-for="operateType in operateArray">
+      <group-title>{{operateType.name}}</group-title>
+      <grid :cols="2">
+        <grid-item v-for="operate in operateType.details">
+          <x-button type="primary">{{operate.name}}</x-button>
+        </grid-item>
+      </grid>
+    </template>
+  </div>
+
+</template>
+
+<script>
+  import { Grid, GridItem, GroupTitle, XButton } from 'vux'
+
+  export default {
+    components: {
+      Grid,
+      GridItem,
+      GroupTitle,
+      XButton
+    },
+    name: 'index',
+    data () {
+      return {
+        propUser: this.user,
+        operateArray: [
+          {
+            name: '购货',
+            details: [
+              {
+                name: '查询采购订单',
+                link: ''
+              },
+              {
+                name: '新增采购订单',
+                link: ''
+              },
+              {
+                name: '查询采购退货单',
+                link: ''
+              },
+              {
+                name: '新增采购退货单',
+                link: ''
+              }
+            ]
+          },
+          {
+            name: '销货',
+            details: [
+              {
+                name: '查询销售报价单',
+                link: ''
+              },
+              {
+                name: '新增销售报价单',
+                link: ''
+              },
+              {
+                name: '查询销售订单',
+                link: ''
+              },
+              {
+                name: '新增销售订单',
+                link: ''
+              },
+              {
+                name: '查询销售退货单',
+                link: ''
+              },
+              {
+                name: '新增销售退货单',
+                link: ''
+              }
+            ]
+          },
+          {
+            name: '仓库',
+            details: [
+              {
+                name: '查询调拨单',
+                link: ''
+              },
+              {
+                name: '新增调拨单',
+                link: ''
+              },
+              {
+                name: '查询采购入库',
+                link: ''
+              },
+              {
+                name: '新增采购入库',
+                link: ''
+              },
+              {
+                name: '查询销售出库',
+                link: ''
+              },
+              {
+                name: '新增销售出库',
+                link: ''
+              },
+              {
+                name: '查询其他入库单',
+                link: ''
+              },
+              {
+                name: '新增其他入库单',
+                link: ''
+              },
+              {
+                name: '查询其他出库单',
+                link: ''
+              },
+              {
+                name: '新增其他出库单',
+                link: ''
+              },
+              {
+                name: '盘点',
+                link: ''
+              }
+            ]
+          },
+          {
+            name: '资金',
+            details: [
+              {
+                name: '查询收款单',
+                link: ''
+              },
+              {
+                name: '新增收款单',
+                link: ''
+              },
+              {
+                name: '查询付款单',
+                link: ''
+              },
+              {
+                name: '新增付款单',
+                link: ''
+              },
+              {
+                name: '查询其他收入单',
+                link: ''
+              },
+              {
+                name: '新增其他收入单',
+                link: ''
+              },
+              {
+                name: '查询其他支出单',
+                link: ''
+              },
+              {
+                name: '新增其他支出单',
+                link: ''
+              }
+            ]
+          }
+        ]
+      }
+    },
+    created () {
+      // load the page
+
+    },
+    methods: { },
+    props: ['user']
+  }
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+
+
+</style>

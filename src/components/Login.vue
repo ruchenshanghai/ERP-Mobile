@@ -6,9 +6,9 @@
       九五尊易-ERP
     </div>
     <group title="身份认证/Identity" title-color="black">
-      <x-input title="账号名/Account" v-model="user.userName" type="text" required
+      <x-input title="账号名/Account" v-model="propUser.userName" type="text" required
                placeholder="请填写用户名或注册邮箱"></x-input>
-      <x-input title="密码/Password" v-model="user.userPassword" type="password" required
+      <x-input title="密码/Password" v-model="propUser.userPassword" type="password" required
                placeholder="请填写账号密码"></x-input>
       <x-button type="primary" :disable="loginLoading" :show-loading="loginLoading" :text="loginText"
                 @click.native="loginClick"></x-button>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import { XButton, AlertModule, Group, XInput } from 'vux'
+  import { XButton, AlertModule, Group, XInput, md5 } from 'vux'
 
   export default {
     components: {
@@ -30,28 +30,22 @@
     name: 'login',
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App',
+        propUser: this.user,
         loginText: '登录/Login',
         loginLoading: false
       }
     },
     created () {
-      // load the detail main data
-//            self.checkAdminRight();
-//    this.$http.post('/staff/validate', {
-//      userName: 'wenjin',
-//      userpwd: 'w123456'
-//    }).then(res => {
-//      console.log(JSON.stringify(res.data))
-//    })
+      // load the page
+
     },
     methods: {
       loginClick () {
-        if (this.user.userName === '' || this.user.userPassword === '') {
+        if (this.propUser.userName === '' || this.propUser.userPassword === '') {
           AlertModule.show({
             title: '警告/Warning',
             content: '请完整输入账号和密码<br />Check the username and password',
-            buttonText: '返回'
+            buttonText: '返回/Back'
 //          onShow () {
 //            console.log('Module: I\'m showing')
 //          },
@@ -62,23 +56,37 @@
         } else {
           this.loginLoading = true
           this.loginText = 'Processing'
-//          this.$http.post('/staff/validate', {
-//            userName: 'wenjin',
-//            userpwd: 'w123456'
-//          }).then(res => {
-//            console.log(JSON.stringify(res.data))
-//          })
-//          let loginRes = {
-//            userName: 'wenjin',
-//            userPassword: 'testpassword'
-//          }
+          // md5 encrypt
+          this.propUser.userPassword = md5(this.propUser.userPassword)
+          this.$http.post(this.propUser.validateUrl, {
+            userName: this.propUser.userName,
+            userpwd: this.propUser.userPassword
+          }).then(res => {
+            this.loginLoading = false
+            let loginRes = res.data
+            if (loginRes.status) {
+              this.$emit('resLoginUser', JSON.parse(loginRes.info))
+              AlertModule.show({
+                title: '提示/Tips',
+                content: '登陆成功/Login success',
+                buttonText: '确定/Confirm',
+                onHide () {
+                  // redirect to home data list
+//                  window.location.reload()
+                }
+              })
+            } else {
+              AlertModule.show({
+                title: '警告/Warning',
+                content: '账号和密码不匹配<br />Illegal username and password',
+                buttonText: '返回/Back',
+                onHide () {
+                  window.location.reload()
+                }
+              })
+            }
+          })
         }
-        this.$emit('resLogin', {
-          userName: 'wenjin',
-          userPassword: 'testpassword',
-          email: 'test@trest',
-          mobile: 12332112321
-        })
       }
     },
     props: ['user']

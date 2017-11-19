@@ -1,26 +1,11 @@
 <template>
   <div>
-
-    <!--<div class="logo-div">-->
-      <!--<img class="logo-png" src="../assets/logo.png">-->
-      <!--九五尊易-ERP-->
-    <!--</div>-->
-    <!--<group title="身份认证/Identity" title-color="black">-->
-      <!--<x-input title="账号名/Account" v-model="userName" type="text" required-->
-               <!--placeholder="请填写用户名或注册邮箱"></x-input>-->
-      <!--<x-input title="密码/Password" v-model="userPassword" type="password" required-->
-               <!--placeholder="请填写账号密码"></x-input>-->
-      <!--<x-button type="primary" :disable="loginLoading" :show-loading="loginLoading" :text="loginText"-->
-                <!--@click.native="loginClick"></x-button>-->
-    <!--</group>-->
-
-    <!--<x-header :left-options="header.leftOptions" :right-options="header.rightOptions" @on-click-more="headerRightClick">{{user.displayName}}</x-header>-->
     <x-header :left-options="header.leftOptions">
-      {{header.pageStatus}}
-      <a slot="right" @click="headerRightClick">{{header.rightOptions.showText}}
-    </a></x-header>
+      <a slot="right" @click="headerRightClick">{{propUser.name}}
+      </a></x-header>
     <div v-transfer-dom>
-      <actionsheet :menus="this.propUser.menus" v-model="header.showMenus" show-cancel></actionsheet>
+      <actionsheet :menus="arragneMenus" v-model="header.showMenus" show-cancel cancel-text="确定"
+                   @on-click-menu="menuClick" @on-click-menu-logout="menuLogoutClick"></actionsheet>
     </div>
   </div>
 
@@ -46,38 +31,46 @@
             showBack: false
           },
           rightOptions: {
-            showMore: true,
-            showText: 'Please Login First!'
+            showMore: true
           },
-          pageStatus: 'Login',
-          showMenus: false,
-          menus: {
-            a: '123',
-            b: '456'
-          }
+          showMenus: false
         }
       }
     },
-    created () {
-      // load the detail main data
-//            self.checkAdminRight();
-//    this.$http.post('/staff/validate', {
-//      userName: 'wenjin',
-//      userpwd: 'w123456'
-//    }).then(res => {
-//      console.log(JSON.stringify(res.data))
-//    })
-    },
+    created () { },
     methods: {
       headerRightClick () {
         this.header.showMenus = true
+      },
+      menuClick (menuKey, menuItem) {
+        console.log(menuKey)
+        console.log(JSON.stringify(menuItem))
+      },
+      menuLogoutClick () {
+        console.log('log out')
+        this.$router.go(0)
       }
     },
-    computed: { },
-    watch: {
-      propUser (to, from) {
-        console.log(JSON.stringify(to))
-        console.log(JSON.stringify(from))
+    computed: {
+      arragneMenus () {
+        if (this.propUser.isLogin) {
+          return {
+            userName: 'UserName: ' + this.propUser.userName,
+            name: 'Name: ' + this.propUser.name,
+            email: 'Email: ' + this.propUser.email,
+            mobile: 'Mobile: ' + this.propUser.mobile,
+            logout: '退出登录/Logout'
+          }
+//          ['UserName: ' + this.propUser.userName, 'Name: ' + this.propUser.name, 'Email: ' + this.propUser.email, 'Mobile: ' + this.propUser.mobile, '退出登录/Logout']
+//          {
+//            userName: 'UserName: ' + this.propUser.userName,
+//              name: 'Name: ' + this.propUser.name,
+//            email: 'Email: ' + this.propUser.email,
+//            mobile: 'Mobile: ' + this.propUser.mobile,
+//            logout: '退出登录/Logout'}
+        } else {
+          return null
+        }
       }
     },
     props: ['user']
