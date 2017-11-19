@@ -8,7 +8,7 @@
     <group title="身份认证/Identity" title-color="black">
       <x-input title="账号名/Account" v-model="propUser.userName" type="text" required
                placeholder="请填写用户名或注册邮箱"></x-input>
-      <x-input title="密码/Password" v-model="propUser.userPassword" type="password" required
+      <x-input title="密码/Password" v-model="propUser.userpwd" type="password" required
                placeholder="请填写账号密码"></x-input>
       <x-button type="primary" :disable="loginLoading" :show-loading="loginLoading" :text="loginText"
                 @click.native="loginClick"></x-button>
@@ -42,7 +42,7 @@
     methods: {
       loginClick () {
         const self = this
-        if (self.propUser.userName === '' || self.propUser.userPassword === '') {
+        if (self.propUser.userName === '' || self.propUser.userpwd === '') {
           AlertModule.show({
             title: '警告/Warning',
             content: '请完整输入账号和密码<br />Check the username and password',
@@ -58,10 +58,10 @@
           self.loginLoading = true
           self.loginText = 'Processing'
           // md5 encrypt
-          self.propUser.userPassword = md5(self.propUser.userPassword)
+          self.propUser.userpwd = md5(self.propUser.userpwd)
           self.$http.post(self.propUser.validateUrl, {
             userName: self.propUser.userName,
-            userpwd: self.propUser.userPassword
+            userpwd: self.propUser.userpwd
           }).then(res => {
             self.loginLoading = false
             let loginRes = res.data

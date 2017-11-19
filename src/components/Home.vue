@@ -20,7 +20,7 @@
           validateUrl: '/Staff/validate',
           userName: '',
           name: 'need login',
-          userPassword: '',
+          userpwd: '',
           email: '',
           mobil: ''
         },
@@ -40,7 +40,7 @@
         this.user.isLogin = true
         this.user.userName = resUser.userName
         this.user.name = resUser.name
-        this.user.userPassword = resUser.userPassword
+        this.user.userpwd = resUser.userpwd
         this.user.email = resUser.email
         this.user.mobile = resUser.mobile
       },
@@ -50,14 +50,14 @@
 //          validateUrl: '/Staff/validate',
 //          userName: '',
 //          name: 'need login',
-//          userPassword: '',
+//          userpwd: '',
 //          email: '',
 //          mobil: ''
 //        }
         this.user.isLogin = false
         this.user.userName = ''
         this.user.name = 'need login'
-        this.user.userPassword = ''
+        this.user.userpwd = ''
         this.user.email = ''
         this.user.mobil = ''
       }
