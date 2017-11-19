@@ -3,8 +3,10 @@
     <template v-for="operateType in operateArray">
       <group-title>{{operateType.name}}</group-title>
       <grid :cols="2">
-        <grid-item v-for="operate in operateType.details">
-          <x-button type="primary">{{operate.name}}</x-button>
+        <grid-item v-for="operation in operateType.details">
+          <router-link :to="operation.link">
+            <x-button type="primary">{{operation.name}}</x-button>
+          </router-link>
         </grid-item>
       </grid>
     </template>
@@ -32,7 +34,7 @@
             details: [
               {
                 name: '查询采购订单',
-                link: ''
+                link: 'PurchaseOrderList'
               },
               {
                 name: '新增采购订单',

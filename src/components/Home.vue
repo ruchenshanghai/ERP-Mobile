@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
-    <v-header :user="user"></v-header>
+    <v-header :user="user" @reset="resetUser"></v-header>
     <div class="content">
       <transition name="move" mode="out-in">
-        <router-view :user="user" @resLoginUser="resLogin"></router-view>
+        <router-view :user="user" :operations="operations" @resLoginUser="resLogin"></router-view>
       </transition>
     </div>
   </div>
@@ -11,17 +11,24 @@
 
 <script>
   import vHeader from './Header.vue'
+
   export default {
     data () {
       return {
         user: {
           isLogin: false,
-          validateUrl: '/staff/validate',
+          validateUrl: '/Staff/validate',
           userName: '',
           name: 'need login',
           userPassword: '',
           email: '',
           mobil: ''
+        },
+        operations: {
+          purchaseOrder: {
+            getAllUrl: '/PurchaseOrder/getAllList',
+            createNewUrl: ''
+          }
         }
       }
     },
@@ -36,6 +43,23 @@
         this.user.userPassword = resUser.userPassword
         this.user.email = resUser.email
         this.user.mobile = resUser.mobile
+      },
+      resetUser () {
+//        this.user = {
+//          isLogin: false,
+//          validateUrl: '/Staff/validate',
+//          userName: '',
+//          name: 'need login',
+//          userPassword: '',
+//          email: '',
+//          mobil: ''
+//        }
+        this.user.isLogin = false
+        this.user.userName = ''
+        this.user.name = 'need login'
+        this.user.userPassword = ''
+        this.user.email = ''
+        this.user.mobil = ''
       }
     }
   }

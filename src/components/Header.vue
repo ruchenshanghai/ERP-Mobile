@@ -5,7 +5,7 @@
       </a></x-header>
     <div v-transfer-dom>
       <actionsheet :menus="arragneMenus" v-model="header.showMenus" show-cancel cancel-text="确定"
-                   @on-click-menu="menuClick" @on-click-menu-logout="menuLogoutClick"></actionsheet>
+                   @on-click-menu-logout="menuLogoutClick"></actionsheet>
     </div>
   </div>
 
@@ -37,18 +37,24 @@
         }
       }
     },
-    created () { },
+    created () {
+//      if (!this.propUser.isLogin) {
+//        this.$router.push('/')
+//      }
+    },
     methods: {
       headerRightClick () {
         this.header.showMenus = true
       },
-      menuClick (menuKey, menuItem) {
-        console.log(menuKey)
-        console.log(JSON.stringify(menuItem))
-      },
+//      menuClick (menuKey, menuItem) {
+//        console.log(menuKey)
+//        console.log(JSON.stringify(menuItem))
+//      },
       menuLogoutClick () {
         console.log('log out')
-        this.$router.go(0)
+
+        this.$emit('reset')
+        this.$router.push('/Home')
       }
     },
     computed: {
@@ -71,6 +77,12 @@
         } else {
           return null
         }
+      }
+    },
+    watch: {
+      propUser (to, from) {
+        console.log(JSON.stringify(to))
+        console.log(JSON.stringify(from))
       }
     },
     props: ['user']

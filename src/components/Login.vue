@@ -37,11 +37,12 @@
     },
     created () {
       // load the page
-
+//      if (this.$route.fullPath)
     },
     methods: {
       loginClick () {
-        if (this.propUser.userName === '' || this.propUser.userPassword === '') {
+        const self = this
+        if (self.propUser.userName === '' || self.propUser.userPassword === '') {
           AlertModule.show({
             title: '警告/Warning',
             content: '请完整输入账号和密码<br />Check the username and password',
@@ -54,25 +55,25 @@
 //          }
           })
         } else {
-          this.loginLoading = true
-          this.loginText = 'Processing'
+          self.loginLoading = true
+          self.loginText = 'Processing'
           // md5 encrypt
-          this.propUser.userPassword = md5(this.propUser.userPassword)
-          this.$http.post(this.propUser.validateUrl, {
-            userName: this.propUser.userName,
-            userpwd: this.propUser.userPassword
+          self.propUser.userPassword = md5(self.propUser.userPassword)
+          self.$http.post(self.propUser.validateUrl, {
+            userName: self.propUser.userName,
+            userpwd: self.propUser.userPassword
           }).then(res => {
-            this.loginLoading = false
+            self.loginLoading = false
             let loginRes = res.data
             if (loginRes.status) {
-              this.$emit('resLoginUser', JSON.parse(loginRes.info))
+              self.$emit('resLoginUser', JSON.parse(loginRes.info))
               AlertModule.show({
                 title: '提示/Tips',
                 content: '登陆成功/Login success',
                 buttonText: '确定/Confirm',
                 onHide () {
                   // redirect to home data list
-//                  window.location.reload()
+                  self.$router.push('Index')
                 }
               })
             } else {
@@ -81,7 +82,7 @@
                 content: '账号和密码不匹配<br />Illegal username and password',
                 buttonText: '返回/Back',
                 onHide () {
-                  window.location.reload()
+                  self.$router.go(0)
                 }
               })
             }

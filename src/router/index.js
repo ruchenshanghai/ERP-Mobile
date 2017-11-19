@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Index from '@/components/Index'
+import PurchaseOrderList from '@/components/PurchaseOrder/PurchaseOrderList'
 
 Vue.use(Router)
 
@@ -19,14 +20,23 @@ export default new Router({
       component: Home,
       children: [
         {
-          name: 'Login',
           path: '/',
+          redirect: '/Login'
+        },
+        {
+          name: 'Login',
+          path: '/Login',
           component: Login
         },
         {
           name: 'Index',
           path: '/Index',
           component: Index
+        },
+        {
+          name: 'PurchaseOrderList',
+          path: '/PurchaseOrderList',
+          component: PurchaseOrderList
         },
         {
           path: '*',
