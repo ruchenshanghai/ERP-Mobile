@@ -3,11 +3,13 @@
     <template v-for="operateType in operateArray">
       <group-title>{{operateType.name}}</group-title>
       <grid :cols="2">
-        <grid-item v-for="operation in operateType.details">
-          <router-link :to="operation.link">
-            <x-button type="primary">{{operation.name}}</x-button>
-          </router-link>
-        </grid-item>
+        <template v-for="operation in operateType.details">
+          <grid-item>
+            <router-link :to="operation.link">
+              <x-button type="primary">{{operation.name}}</x-button>
+            </router-link>
+          </grid-item>
+        </template>
       </grid>
     </template>
   </div>

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/projectPath.iml" filepath="$PROJECT_DIR$/.idea/projectPath.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ERP-MobileWeb.iml" filepath="$PROJECT_DIR$/ERP-MobileWeb.iml" />
     </modules>
   </component>
 </project>
