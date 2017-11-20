@@ -17,7 +17,7 @@
       return {
         user: {
           isLogin: false,
-          validateUrl: '/Staff/validate',
+          validateUrl: '/index.php/Staff/validate',
           userName: '',
           name: 'need login',
           userpwd: '',
@@ -26,7 +26,7 @@
         },
         operations: {
           purchaseOrder: {
-            getAllUrl: '/PurchaseOrder/getAllList',
+            getAllUrl: '/index.php/PurchaseOrder/getAllList',
             createNewUrl: ''
           }
         }
