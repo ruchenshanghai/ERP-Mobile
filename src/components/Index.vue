@@ -57,7 +57,7 @@
             details: [
               {
                 name: '查询销售报价单',
-                link: ''
+                link: 'SalesOrderList/SalesQuotes'
               },
               {
                 name: '新增销售报价单',
@@ -65,7 +65,7 @@
               },
               {
                 name: '查询销售订单',
-                link: ''
+                link: 'SalesOrderList/SalesOrders'
               },
               {
                 name: '新增销售订单',
@@ -73,7 +73,7 @@
               },
               {
                 name: '查询销售退货单',
-                link: ''
+                link: 'SalesOrderList/SalesReturns'
               },
               {
                 name: '新增销售退货单',

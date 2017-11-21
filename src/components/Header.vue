@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header :left-options="header.leftOptions">
+    <x-header :left-options="header.leftOptions" :title="header.title" @on-click-back="headerLeftClick">
       <a slot="right" @click="headerRightClick">{{propUser.name}}
       </a></x-header>
     <div v-transfer-dom>
@@ -28,12 +28,15 @@
         propUser: this.user,
         header: {
           leftOptions: {
-            showBack: false
+            showBack: true,
+            backText: '主页',
+            preventGoBack: true
           },
           rightOptions: {
             showMore: true
           },
-          showMenus: false
+          showMenus: false,
+          title: ''
         }
       }
     },
@@ -43,6 +46,12 @@
 //      }
     },
     methods: {
+      headerLeftClick () {
+//        if (this.propUser.isLogin) {
+//          this.$router.push('/Index')
+//        }
+        this.$router.push('/Index')
+      },
       headerRightClick () {
         this.header.showMenus = true
       },
@@ -55,6 +64,31 @@
 
         this.$emit('reset')
         this.$router.push('/Home')
+      },
+      arrangeTitle () {
+        switch (this.$route.path) {
+          case '/Login':
+            this.header.title = '登录'
+            break
+          case '/Index':
+            this.header.title = '主页'
+            break
+          case '/PurchaseOrderList':
+            this.header.title = '查询采购订单'
+            break
+          case '/CreatePurchaseOrder':
+            this.header.title = '新增采购订单'
+            break
+          case '/SalesOrderList/SalesOrders':
+            this.header.title = '查询销售订单'
+            break
+          case '/SalesOrderList/SalesQuotes':
+            this.header.title = '查询销售报价单'
+            break
+          case '/SalesOrderList/SalesReturns':
+            this.header.title = '查询销售退货单'
+            break
+        }
       }
     },
     computed: {
@@ -80,9 +114,8 @@
       }
     },
     watch: {
-      propUser (to, from) {
-        console.log(JSON.stringify(to))
-        console.log(JSON.stringify(from))
+      $route (to, from) {
+        this.arrangeTitle()
       }
     },
     props: ['user']

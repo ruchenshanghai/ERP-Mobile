@@ -8,29 +8,34 @@
       <datetime v-model="dateEnd" title="结束日期" @on-change="filterDataByDate"></datetime>
     </group>
 
+
     <template v-for="order in displayList">
       <group :title="'订单编号: ' + order.billNo + ' 业务类别: ' + order.transTypeName">
         <grid :cols="3" class="grid-order">
           <grid-item label="订单日期">
             {{order.billDate}}
           </grid-item>
-          <grid-item label="业务类别">
-            {{order.transTypeName}}
+          <grid-item label="销售人员">
+            {{order.staffName}}
           </grid-item>
-          <grid-item label="供应商">
+          <grid-item label="客户">
             {{order.contactName}}
           </grid-item>
-          <grid-item label="采购金额">
-            {{order.amount}}
+          <grid-item label="销售金额">
+            {{order.totalAmount + ' ' + order.currencyCode}}
           </grid-item>
           <grid-item label="数量">
             {{order.totalQty}}
           </grid-item>
-          <grid-item label="订单状态">
-            {{order.billStatusName}}
-          </grid-item>
-          <grid-item label="交货日期">
-            {{order.deliveryDate || '未设置'}}
+
+          <template v-if="$route.params.salesOrderType === 'SalesOrders'">
+            <grid-item label="订单状态">
+              {{computeBillStatusName(order.billStatus)}}
+            </grid-item>
+          </template>
+
+          <grid-item label="交货周期/天">
+            {{(computeDayInterval(order.billDate, order.deliveryDate) === null) ? '未设置' : computeDayInterval(order.billDate, order.deliveryDate)}}
           </grid-item>
           <grid-item label="制单人">
             {{order.userName}}
@@ -60,7 +65,7 @@
       Grid,
       GridItem
     },
-    name: 'purchase-order-list',
+    name: 'sales-order-list',
     data () {
       return {
         propUser: this.user,
@@ -73,12 +78,16 @@
       }
     },
     created () {
-      this.$http.post(this.propOperation.purchaseOrder.getAllUrl, this.propUser).then(orderRes => {
-        this.orderList = orderRes.data.info
-        this.searchList = this.orderList
-        this.displayList = this.orderList
+      this.$http.post(this.propOperation.salesOrder.getAllUrl + this.$route.params.salesOrderType, this.propUser).then(orderRes => {
+        if (orderRes.data.status) {
+          this.orderList = orderRes.data.info
+          this.searchList = this.orderList
+          this.displayList = this.orderList
+        }
       })
-//      this.$http.get('http://localhost:3000/PurchaseOrders', this.propUser).then(orderRes => {
+//      this.$http.get('http://localhost:3000/SalesOrders', this.propUser).then(orderRes => {
+//        console.log('route path: ' + this.$route.params.salesOrderType)
+//        console.log(JSON.stringify(orderRes.data))
 //        this.orderList = orderRes.data
 //        this.searchList = this.orderList
 //        this.displayList = this.orderList
@@ -87,6 +96,22 @@
     ready () {
     },
     methods: {
+      computeDayInterval (preDate, postDate) {
+        if (preDate === null || postDate === null) {
+          return null
+        }
+        let tempStart = new Date(preDate)
+        let tempEnd = new Date(postDate)
+        let dayInterval = (tempEnd - tempStart) / (24 * 60 * 60 * 1000)
+        return dayInterval
+      },
+      computeBillStatusName (statusCode) {
+        if (statusCode === 2) {
+          return '全部出库'
+        } else {
+          return '未出库'
+        }
+      },
       searchTextChange (val) {
         console.log(val)
         let tempList = []
@@ -134,16 +159,17 @@
         this.displayList = tempList
       }
     },
-    computed: {},
+    computed: {
+    },
     props: ['user', 'operations']
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.grid-order {
-  text-align: center;
-  margin-bottom: 20px;
-}
+  .grid-order {
+    text-align: center;
+    margin-bottom: 20px;
+  }
 
 </style>
