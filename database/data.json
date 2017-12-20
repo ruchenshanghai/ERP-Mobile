@@ -1,5 +1,5 @@
 {
-  "PurchaseOrders": [
+  "PurchaseOrder": [
     {
       "id": 27,
       "checkName": "",
@@ -1345,7 +1345,7 @@
       "billStatusName": "部分入库"
     }
   ],
-  "SalesOrders": [
+  "SalesOrder": [
     {
       "id": "23",
       "buId": "7",
@@ -2773,7 +2773,7 @@
       "currencyText": "人民币"
     }
   ],
-  "SalesQuotes": [
+  "SalesQuote": [
     {
       "id": "153",
       "buId": "60",

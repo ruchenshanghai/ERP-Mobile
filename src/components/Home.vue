@@ -3,7 +3,7 @@
     <v-header :user="user" @reset="resetUser"></v-header>
     <div class="content">
       <transition name="move" mode="out-in">
-        <router-view :user="user" :operations="operations" @resLoginUser="resLogin"></router-view>
+        <router-view :config="config" :user="user" :operations="operations" @resLoginUser="resLogin"></router-view>
       </transition>
     </div>
   </div>
@@ -17,12 +17,11 @@
       return {
         user: {
           isLogin: false,
-          validateUrl: '/index.php/api/Staff/validate',
           userName: '',
-          name: 'need login',
-          userpwd: '',
+          password: '',
+          name: '',
           email: '',
-          mobil: ''
+          mobile: ''
         },
         operations: {
           purchaseOrder: {
@@ -33,6 +32,19 @@
             getAllUrl: '/index.php/api/SalesOrder/get',
             createNewUrl: ''
           }
+        },
+        config: {
+          Staff: {
+            validateURL: 'http://localhost/api/Staff/validate'
+          },
+          Order: {
+            PurchaseOrder: {
+              fetchURL: 'http://localhost:3000/PurchaseOrder'
+            },
+            SalesOrder: {
+              fetchURL: 'http://localhost:3000/SalesOrder'
+            }
+          }
         }
       }
     },
@@ -41,6 +53,14 @@
     },
     methods: {
       resLogin (resUser) {
+        /**
+         * resUser format: id userName name userpwd roleid status number mobile email lever rightids disable allowsms birthday commissionrate creatorId deptId description empId empType fullId leftDate parentId sex isDelete
+         */
+        // let tempStr = ''
+        // for (let key in resUser) {
+        //   tempStr += key + ' '
+        // }
+        // console.log(tempStr)
         this.user.isLogin = true
         this.user.userName = resUser.userName
         this.user.name = resUser.name

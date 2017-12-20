@@ -47,9 +47,6 @@
     },
     methods: {
       headerLeftClick () {
-//        if (this.propUser.isLogin) {
-//          this.$router.push('/Index')
-//        }
         this.$router.push('/Index')
       },
       headerRightClick () {
