@@ -74,19 +74,31 @@
             this.header.title = '查询采购订单'
             break
           case '/PurchaseReturnQuery':
-            this.header.title = '查询退货单'
+            this.header.title = '查询采购退货单'
             break
-          case '/CreatePurchaseOrder':
-            this.header.title = '新增采购订单'
-            break
-          case '/SalesOrderList/SalesOrders':
+          case '/SalesOrderQuery':
             this.header.title = '查询销售订单'
             break
-          case '/SalesOrderList/SalesQuotes':
+          case '/SalesQuoteQuery':
             this.header.title = '查询销售报价单'
             break
-          case '/SalesOrderList/SalesReturns':
+          case '/SalesReturnQuery':
             this.header.title = '查询销售退货单'
+            break
+          case '/AllocationListQuery':
+            this.header.title = '查询调拨单'
+            break
+          case '/PurchaseInboundQuery':
+            this.header.title = '查询采购入库单'
+            break
+          case '/SalesOutboundQuery':
+            this.header.title = '查询销售出库单'
+            break
+          case '/OtherInboundQuery':
+            this.header.title = '查询其他入库单'
+            break
+          case '/OtherOutboundQuery':
+            this.header.title = '查询其他出库单'
             break
         }
       }

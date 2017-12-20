@@ -24,23 +24,23 @@
           <grid-item label="订单日期">
             {{order.billDate}}
           </grid-item>
-          <grid-item label="业务类别">
-            {{order.transTypeName}}
+          <grid-item label="销售人员">
+            {{order.staffName}}
           </grid-item>
-          <grid-item label="供应商">
+          <grid-item label="客户">
             {{order.contactName}}
           </grid-item>
-          <grid-item label="采购金额">
-            {{order.amount}}
+          <grid-item label="销售金额">
+            {{order.totalAmount + ' ' + order.currencyCode}}
           </grid-item>
           <grid-item label="数量">
             {{order.totalQty}}
           </grid-item>
           <grid-item label="订单状态">
-            {{order.billStatusName}}
+            {{computeBillStatusName(order.billStatus)}}
           </grid-item>
-          <grid-item label="交货日期">
-            {{order.deliveryDate || '未设置'}}
+          <grid-item label="交货周期/天">
+            {{order.deliveryDate}}
           </grid-item>
           <grid-item label="制单人">
             {{order.userName}}
@@ -71,7 +71,7 @@
       Grid,
       GridItem
     },
-    name: 'purchase-order-list',
+    name: 'sales-order-list',
     data () {
       return {
         propUser: this.user,
@@ -99,15 +99,13 @@
       this.fetchConfig.endDate = moment().format('YYYY-MM-DD')
       this.fetchOrderListByConfig()
     },
-    ready () {
-    },
     methods: {
       fetchOrderListByConfig () {
         let postData = { }
         postData.userName = this.user.userName
         postData.password = this.user.password
         postData.fetchConfig = this.fetchConfig
-        this.$http.post(this.config.Purchase.PurchaseOrder.fetchURL, postData).then(orderRes => {
+        this.$http.post(this.config.Sales.SalesOrder.fetchURL, postData).then(orderRes => {
           orderRes = orderRes.data
           if (!orderRes.status) {
             this.$router.push('Index')
@@ -130,6 +128,13 @@
       handleCurrentPageChange (val) {
         this.fetchConfig.pageIndex = val
         this.fetchOrderListByConfig()
+      },
+      computeBillStatusName (statusCode) {
+        if (statusCode === 2) {
+          return '全部出库'
+        } else {
+          return '未出库'
+        }
       }
     },
     computed: {},
@@ -139,9 +144,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.grid-order {
-  text-align: center;
-  margin-bottom: 20px;
-}
+  .grid-order {
+    text-align: center;
+    margin-bottom: 20px;
+  }
 
 </style>

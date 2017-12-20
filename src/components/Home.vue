@@ -30,12 +30,32 @@
               fetchURL: 'http://localhost/api/PurchaseReturn/fetch'
             }
           },
-          Order: {
-            PurchaseOrder: {
-              fetchURL: 'http://localhost/api/PurchaseOrder/fetch'
+          Sales: {
+            SalesQuote: {
+              fetchURL: 'http://localhost/api/SalesQuote/fetch'
             },
             SalesOrder: {
-              fetchURL: 'http://localhost:3000/SalesOrder'
+              fetchURL: 'http://localhost/api/SalesOrder/fetch'
+            },
+            SalesReturn: {
+              fetchURL: 'http://localhost/api/SalesReturn/fetch'
+            }
+          },
+          Warehouse: {
+            AllocationList: {
+              fetchURL: 'http://localhost/api/AllocationList/fetch'
+            },
+            PurchaseInbound: {
+              fetchURL: 'http://localhost/api/PurchaseInbound/fetch'
+            },
+            SalesOutbound: {
+              fetchURL: 'http://localhost/api/SalesOutbound/fetch'
+            },
+            OtherInbound: {
+              fetchURL: 'http://localhost/api/OtherInbound/fetch'
+            },
+            OtherOutbound: {
+              fetchURL: 'http://localhost/api/OtherOutbound/fetch'
             }
           }
         }

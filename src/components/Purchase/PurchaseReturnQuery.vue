@@ -1,7 +1,7 @@
 <template>
   <div>
     <group title="搜索">
-      <x-input title="请输入搜索关键词" placeholder="keyword" :show-clear="false"  placeholder-align="right" @on-change="searchTextChange"></x-input>
+      <x-input title="请输入搜索关键词" v-model="fetchConfig.keyword" placeholder="keyword" :show-clear="false"  placeholder-align="right" @on-change="searchTextChange"></x-input>
     </group>
 
     <group title="请选择日期区间">
@@ -14,9 +14,11 @@
       <el-pagination
         small :current-page="fetchConfig.pageIndex" :page-size="fetchConfig.pageSize"
         layout="prev, pager, next, jumper" :total="fetchConfig.rowsCount"
+
         @current-change="handleCurrentPageChange">
       </el-pagination>
     </group>
+    <!--:current-page="currentPage4"-->
 
     <template v-for="order in displayList">
       <group :title="'订单编号: ' + order.billNo + ' 业务类别: ' + order.transTypeName">
@@ -120,7 +122,6 @@
         })
       },
       searchTextChange (val) {
-        this.fetchConfig.keyword = val
         this.fetchConfig.pageIndex = 1
         this.fetchOrderListByConfig()
       },

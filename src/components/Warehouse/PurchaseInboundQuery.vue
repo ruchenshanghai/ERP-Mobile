@@ -19,28 +19,22 @@
     </group>
 
     <template v-for="order in displayList">
-      <group :title="'订单编号: ' + order.billNo + ' 业务类别: ' + order.transTypeName">
+      <group :title="'单据编号: ' + order.billNo + ' 业务类别: ' + order.transTypeName">
         <grid :cols="3" class="grid-order">
-          <grid-item label="订单日期">
+          <grid-item label="单据日期">
             {{order.billDate}}
-          </grid-item>
-          <grid-item label="业务类别">
-            {{order.transTypeName}}
           </grid-item>
           <grid-item label="供应商">
             {{order.contactName}}
           </grid-item>
-          <grid-item label="采购金额">
-            {{order.amount}}
+          <grid-item label="采购数量">
+            {{order.puQty}}
           </grid-item>
-          <grid-item label="数量">
+          <grid-item label="入库数量">
             {{order.totalQty}}
           </grid-item>
-          <grid-item label="订单状态">
-            {{order.billStatusName}}
-          </grid-item>
-          <grid-item label="交货日期">
-            {{order.deliveryDate || '未设置'}}
+          <grid-item label="入库状态">
+            {{order.billStatus}}
           </grid-item>
           <grid-item label="制单人">
             {{order.userName}}
@@ -50,6 +44,9 @@
           </grid-item>
           <grid-item label="备注">
             {{order.description || '未设置'}}
+          </grid-item>
+          <grid-item label="源单编号">
+            {{order.srcBillNo || '未设置'}}
           </grid-item>
         </grid>
       </group>
@@ -71,7 +68,7 @@
       Grid,
       GridItem
     },
-    name: 'purchase-order-list',
+    name: 'purchase-inbound-list',
     data () {
       return {
         propUser: this.user,
@@ -99,15 +96,13 @@
       this.fetchConfig.endDate = moment().format('YYYY-MM-DD')
       this.fetchOrderListByConfig()
     },
-    ready () {
-    },
     methods: {
       fetchOrderListByConfig () {
         let postData = { }
         postData.userName = this.user.userName
         postData.password = this.user.password
         postData.fetchConfig = this.fetchConfig
-        this.$http.post(this.config.Purchase.PurchaseOrder.fetchURL, postData).then(orderRes => {
+        this.$http.post(this.config.Warehouse.PurchaseInbound.fetchURL, postData).then(orderRes => {
           orderRes = orderRes.data
           if (!orderRes.status) {
             this.$router.push('Index')
@@ -130,6 +125,13 @@
       handleCurrentPageChange (val) {
         this.fetchConfig.pageIndex = val
         this.fetchOrderListByConfig()
+      },
+      computeBillStatusName (statusCode) {
+        if (statusCode === 2) {
+          return '全部出库'
+        } else {
+          return '未出库'
+        }
       }
     },
     computed: {},
@@ -139,9 +141,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.grid-order {
-  text-align: center;
-  margin-bottom: 20px;
-}
+  .grid-order {
+    text-align: center;
+    margin-bottom: 20px;
+  }
 
 </style>

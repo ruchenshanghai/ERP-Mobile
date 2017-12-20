@@ -57,7 +57,7 @@
             details: [
               {
                 name: '查询销售报价单',
-                link: 'SalesOrderList/SalesQuotes'
+                link: 'SalesQuoteQuery'
               },
               {
                 name: '新增销售报价单',
@@ -65,7 +65,7 @@
               },
               {
                 name: '查询销售订单',
-                link: 'SalesOrderList/SalesOrders'
+                link: 'SalesOrderQuery'
               },
               {
                 name: '新增销售订单',
@@ -73,7 +73,7 @@
               },
               {
                 name: '查询销售退货单',
-                link: 'SalesOrderList/SalesReturns'
+                link: 'SalesReturnQuery'
               },
               {
                 name: '新增销售退货单',
@@ -86,7 +86,7 @@
             details: [
               {
                 name: '查询调拨单',
-                link: ''
+                link: 'AllocationListQuery'
               },
               {
                 name: '新增调拨单',
@@ -94,7 +94,7 @@
               },
               {
                 name: '查询采购入库',
-                link: ''
+                link: 'PurchaseInboundQuery'
               },
               {
                 name: '新增采购入库',
@@ -102,7 +102,7 @@
               },
               {
                 name: '查询销售出库',
-                link: ''
+                link: 'SalesOutboundQuery'
               },
               {
                 name: '新增销售出库',
@@ -110,7 +110,7 @@
               },
               {
                 name: '查询其他入库单',
-                link: ''
+                link: 'OtherInboundQuery'
               },
               {
                 name: '新增其他入库单',
@@ -118,7 +118,7 @@
               },
               {
                 name: '查询其他出库单',
-                link: ''
+                link: 'OtherOutboundQuery'
               },
               {
                 name: '新增其他出库单',
