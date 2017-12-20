@@ -36,7 +36,7 @@
             details: [
               {
                 name: '查询采购订单',
-                link: 'PurchaseOrderList'
+                link: 'PurchaseOrderQuery'
               },
               {
                 name: '新增采购订单',
@@ -44,7 +44,7 @@
               },
               {
                 name: '查询采购退货单',
-                link: ''
+                link: 'PurchaseReturnQuery'
               },
               {
                 name: '新增采购退货单',
@@ -171,8 +171,10 @@
       }
     },
     created () {
-      // load the page
-
+      // check the login status
+      if (!this.user.isLogin) {
+        this.$router.push('Login')
+      }
     },
     methods: { },
     props: ['user']

@@ -70,8 +70,11 @@
           case '/Index':
             this.header.title = '主页'
             break
-          case '/PurchaseOrderList':
+          case '/PurchaseOrderQuery':
             this.header.title = '查询采购订单'
+            break
+          case '/PurchaseReturnQuery':
+            this.header.title = '查询退货单'
             break
           case '/CreatePurchaseOrder':
             this.header.title = '新增采购订单'
@@ -98,13 +101,6 @@
             mobile: 'Mobile: ' + this.propUser.mobile,
             logout: '退出登录/Logout'
           }
-//          ['UserName: ' + this.propUser.userName, 'Name: ' + this.propUser.name, 'Email: ' + this.propUser.email, 'Mobile: ' + this.propUser.mobile, '退出登录/Logout']
-//          {
-//            userName: 'UserName: ' + this.propUser.userName,
-//              name: 'Name: ' + this.propUser.name,
-//            email: 'Email: ' + this.propUser.email,
-//            mobile: 'Mobile: ' + this.propUser.mobile,
-//            logout: '退出登录/Logout'}
         } else {
           return null
         }

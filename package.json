@@ -13,8 +13,10 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "element-ui": "^2.0.8",
     "fastclick": "^1.0.6",
     "json-server": "^0.12.1",
+    "moment": "^2.20.1",
     "vue": "^2.2.2",
     "vue-router": "^2.2.0",
     "vuex": "^2.1.1",

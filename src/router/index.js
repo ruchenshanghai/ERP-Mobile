@@ -4,7 +4,9 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Index from '@/components/Index'
-import PurchaseOrderList from '@/components/PurchaseOrder/PurchaseOrderList'
+import PurchaseOrderQuery from '@/components/Purchase/PurchaseOrderQuery'
+import PurchaseReturnQuery from '@/components/Purchase/PurchaseReturnQuery'
+
 import SalesOrderList from '@/components/SalesOrder/SalesOrderList'
 
 Vue.use(Router)
@@ -35,9 +37,14 @@ export default new Router({
           component: Index
         },
         {
-          name: 'PurchaseOrderList',
-          path: '/PurchaseOrderList',
-          component: PurchaseOrderList
+          name: 'PurchaseOrderQuery',
+          path: '/PurchaseOrderQuery',
+          component: PurchaseOrderQuery
+        },
+        {
+          name: 'PurchaseReturnQuery',
+          path: '/PurchaseReturnQuery',
+          component: PurchaseReturnQuery
         },
         {
           name: 'SalesOrderList',

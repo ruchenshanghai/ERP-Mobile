@@ -38,7 +38,6 @@
     created () {
       // load the page
 //      if (this.$route.fullPath)
-//       console.log(md5('w123456'))
     },
     methods: {
       loginClick () {
@@ -48,12 +47,6 @@
             title: '警告/Warning',
             content: '请完整输入账号和密码<br />Check the username and password',
             buttonText: '返回/Back'
-//          onShow () {
-//            console.log('Module: I\'m showing')
-//          },
-//          onHide () {
-//            console.log('Module: I\'m hiding now')
-//          }
           })
         } else {
           self.loginLoading = true
