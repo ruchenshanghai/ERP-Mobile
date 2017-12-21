@@ -9,6 +9,7 @@ import PurchaseReturnQuery from '@/components/Purchase/PurchaseReturnQuery'
 
 import SalesQuoteQuery from '@/components/Sales/SalesQuoteQuery'
 import SalesOrderQuery from '@/components/Sales/SalesOrderQuery'
+import SalesReturnQuery from '@/components/Sales/SalesReturnQuery'
 
 import AllocationListQuery from '@/components/Warehouse/AllocationListQuery'
 import PurchaseInboundQuery from '@/components/Warehouse/PurchaseInboundQuery'
@@ -62,6 +63,11 @@ export default new Router({
           name: 'SalesOrderQuery',
           path: '/SalesOrderQuery',
           component: SalesOrderQuery
+        },
+        {
+          name: 'SalesReturnQuery',
+          path: '/SalesReturnQuery',
+          component: SalesReturnQuery
         },
         {
           name: 'AllocationListQuery',
