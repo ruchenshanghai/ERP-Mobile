@@ -20,43 +20,43 @@
         },
         config: {
           Staff: {
-            validateURL: 'http://localhost/api/Staff/validate'
+            validateURL: '/index.php/api/Staff/validate'
           },
           Purchase: {
             PurchaseOrder: {
-              fetchURL: 'http://localhost/api/PurchaseOrder/fetch',
-              detailURL: 'http://localhost/api/PurchaseOrder/detail'
+              fetchURL: '/index.php/api/PurchaseOrder/fetch',
+              detailURL: '/index.php/api/PurchaseOrder/detail'
             },
             PurchaseReturn: {
-              fetchURL: 'http://localhost/api/PurchaseReturn/fetch'
+              fetchURL: '/index.php/api/PurchaseReturn/fetch'
             }
           },
           Sales: {
             SalesQuote: {
-              fetchURL: 'http://localhost/api/SalesQuote/fetch'
+              fetchURL: '/index.php/api/SalesQuote/fetch'
             },
             SalesOrder: {
-              fetchURL: 'http://localhost/api/SalesOrder/fetch'
+              fetchURL: '/index.php/api/SalesOrder/fetch'
             },
             SalesReturn: {
-              fetchURL: 'http://localhost/api/SalesReturn/fetch'
+              fetchURL: '/index.php/api/SalesReturn/fetch'
             }
           },
           Warehouse: {
             AllocationList: {
-              fetchURL: 'http://localhost/api/AllocationList/fetch'
+              fetchURL: '/index.php/api/AllocationList/fetch'
             },
             PurchaseInbound: {
-              fetchURL: 'http://localhost/api/PurchaseInbound/fetch'
+              fetchURL: '/index.php/api/PurchaseInbound/fetch'
             },
             SalesOutbound: {
-              fetchURL: 'http://localhost/api/SalesOutbound/fetch'
+              fetchURL: '/index.php/api/SalesOutbound/fetch'
             },
             OtherInbound: {
-              fetchURL: 'http://localhost/api/OtherInbound/fetch'
+              fetchURL: '/index.php/api/OtherInbound/fetch'
             },
             OtherOutbound: {
-              fetchURL: 'http://localhost/api/OtherOutbound/fetch'
+              fetchURL: '/index.php/api/OtherOutbound/fetch'
             }
           }
         }
