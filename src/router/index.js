@@ -5,6 +5,7 @@ import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Index from '@/components/Index'
 import PurchaseOrderQuery from '@/components/Purchase/PurchaseOrderQuery'
+import PurchaseOrderDetail from '@/components/Purchase/PurchaseOrderDetail'
 import PurchaseReturnQuery from '@/components/Purchase/PurchaseReturnQuery'
 
 import SalesQuoteQuery from '@/components/Sales/SalesQuoteQuery'
@@ -48,6 +49,11 @@ export default new Router({
           name: 'PurchaseOrderQuery',
           path: '/PurchaseOrderQuery',
           component: PurchaseOrderQuery
+        },
+        {
+          name: 'PurchaseOrderDetail',
+          path: '/PurchaseOrderDetail/:ID',
+          component: PurchaseOrderDetail
         },
         {
           name: 'PurchaseReturnQuery',

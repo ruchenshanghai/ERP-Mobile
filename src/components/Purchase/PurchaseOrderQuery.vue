@@ -20,38 +20,40 @@
 
     <template v-for="order in displayList">
       <group :title="'订单编号: ' + order.billNo + ' 业务类别: ' + order.transTypeName">
-        <grid :cols="3" class="grid-order">
-          <grid-item label="订单日期">
-            {{order.billDate}}
-          </grid-item>
-          <grid-item label="业务类别">
-            {{order.transTypeName}}
-          </grid-item>
-          <grid-item label="供应商">
-            {{order.contactName}}
-          </grid-item>
-          <grid-item label="采购金额">
-            {{order.amount}}
-          </grid-item>
-          <grid-item label="数量">
-            {{order.totalQty}}
-          </grid-item>
-          <grid-item label="订单状态">
-            {{order.billStatusName}}
-          </grid-item>
-          <grid-item label="交货日期">
-            {{order.deliveryDate || '未设置'}}
-          </grid-item>
-          <grid-item label="制单人">
-            {{order.userName}}
-          </grid-item>
-          <grid-item label="审核人">
-            {{order.checkName || '未设置'}}
-          </grid-item>
-          <grid-item label="备注">
-            {{order.description || '未设置'}}
-          </grid-item>
-        </grid>
+        <router-link :to="{'name': 'PurchaseOrderDetail', 'params': {'ID': order.id}}">
+          <grid :cols="3" class="grid-order">
+            <grid-item label="订单日期">
+              {{order.billDate}}
+            </grid-item>
+            <grid-item label="业务类别">
+              {{order.transTypeName}}
+            </grid-item>
+            <grid-item label="供应商">
+              {{order.contactName}}
+            </grid-item>
+            <grid-item label="采购金额">
+              {{order.amount}}
+            </grid-item>
+            <grid-item label="数量">
+              {{order.totalQty}}
+            </grid-item>
+            <grid-item label="订单状态">
+              {{order.billStatusName}}
+            </grid-item>
+            <grid-item label="交货日期">
+              {{order.deliveryDate || '未设置'}}
+            </grid-item>
+            <grid-item label="制单人">
+              {{order.userName}}
+            </grid-item>
+            <grid-item label="审核人">
+              {{order.checkName || '未设置'}}
+            </grid-item>
+            <grid-item label="备注">
+              {{order.description || '未设置'}}
+            </grid-item>
+          </grid>
+        </router-link>
       </group>
     </template>
 
@@ -131,6 +133,23 @@
         this.fetchConfig.pageIndex = val
         this.fetchOrderListByConfig()
       }
+      // fetchOrderDetail (orderID) {
+      //   console.log(orderID)
+      //   let postData = {}
+      //   postData.userName = this.user.userName
+      //   postData.password = this.user.password
+      //   postData.fetchConfig = {
+      //     id: orderID
+      //   }
+      //   this.$http.post(this.config.Purchase.PurchaseOrder.detailURL, postData).then(orderRes => {
+      //     orderRes = orderRes.data
+      //     if (!orderRes.status) {
+      //       this.$router.push('Index')
+      //       return
+      //     }
+      //     console.log(JSON.stringify(orderRes.info))
+      //   })
+      // }
     },
     computed: {},
     props: ['user', 'config']

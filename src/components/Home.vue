@@ -24,7 +24,8 @@
           },
           Purchase: {
             PurchaseOrder: {
-              fetchURL: 'http://localhost/api/PurchaseOrder/fetch'
+              fetchURL: 'http://localhost/api/PurchaseOrder/fetch',
+              detailURL: 'http://localhost/api/PurchaseOrder/detail'
             },
             PurchaseReturn: {
               fetchURL: 'http://localhost/api/PurchaseReturn/fetch'
