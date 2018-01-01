@@ -33,10 +33,12 @@
           },
           Sales: {
             SalesQuote: {
-              fetchURL: 'http://localhost/api/SalesQuote/fetch'
+              fetchURL: 'http://localhost/api/SalesQuote/fetch',
+              detailURL: 'http://localhost/api/SalesQuote/detail'
             },
             SalesOrder: {
-              fetchURL: 'http://localhost/api/SalesOrder/fetch'
+              fetchURL: 'http://localhost/api/SalesOrder/fetch',
+              detailURL: 'http://localhost/api/SalesOrder/detail'
             },
             SalesReturn: {
               fetchURL: 'http://localhost/api/SalesReturn/fetch'
