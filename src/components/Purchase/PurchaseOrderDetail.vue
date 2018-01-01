@@ -1,4 +1,5 @@
 <template>
+
   <div>
     <group :title="'订单编号: ' + orderDetail.billNo">
       <grid :cols="3" class="grid-order">
@@ -12,7 +13,7 @@
           {{orderDetail.date}}
         </grid-item>
         <grid-item label="交货日期">
-          {{orderDetail.deliveryDate || '未设置'}}
+          {{(orderDetail.deliveryDate || '未设置') + ' 天'}}
         </grid-item>
         <grid-item label="币种">
           {{orderDetail.currencyText}}
@@ -26,14 +27,8 @@
         <grid-item label="结算账户">
           {{orderDetail.account || '未设置'}}
         </grid-item>
-        <grid-item label='优惠率'>
-          {{orderDetail.disRate + '%'}}
-        </grid-item>
-        <grid-item label="优惠金额">
-          {{orderDetail.disAmount}}
-        </grid-item>
         <grid-item label="优惠后金额">
-          {{orderDetail.rpAmount}}
+          {{orderDetail.totalAmount}}
         </grid-item>
         <grid-item label="备注">
           {{orderDetail.description || '未设置'}}
@@ -69,7 +64,7 @@
             {{item.price}}
           </grid-item>
           <grid-item label="折扣率">
-            {{item.discountRate}}
+            {{item.discountRate + '%'}}
           </grid-item>
           <grid-item label="折扣额">
             {{item.deduction}}
@@ -80,8 +75,8 @@
         </grid>
       </group>
     </template>
-
   </div>
+
 </template>
 
 <script>
@@ -114,7 +109,12 @@
           this.$router.push('Index')
           return
         }
+        if (orderRes.info === null) {
+          this.$router.go(-1)
+          return
+        }
         this.orderDetail = orderRes.info
+        console.log(JSON.stringify(this.orderDetail))
       })
     },
 

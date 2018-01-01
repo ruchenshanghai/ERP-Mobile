@@ -20,35 +20,37 @@
 
     <template v-for="order in displayList">
       <group :title="'订单编号: ' + order.billNo + ' 业务类别: ' + order.transTypeName">
-        <grid :cols="3" class="grid-order">
-          <grid-item label="订单日期">
-            {{order.billDate}}
-          </grid-item>
-          <grid-item label="销售人员">
-            {{order.staffName}}
-          </grid-item>
-          <grid-item label="客户">
-            {{order.contactName}}
-          </grid-item>
-          <grid-item label="销售金额">
-            {{order.totalAmount + ' ' + order.currencyCode}}
-          </grid-item>
-          <grid-item label="数量">
-            {{order.totalQty}}
-          </grid-item>
-          <grid-item label="交货周期/天">
-            {{order.deliveryDate}}
-          </grid-item>
-          <grid-item label="制单人">
-            {{order.userName}}
-          </grid-item>
-          <grid-item label="审核人">
-            {{order.checkName || '未设置'}}
-          </grid-item>
-          <grid-item label="备注">
-            {{order.description || '未设置'}}
-          </grid-item>
-        </grid>
+        <router-link :to="{'name': 'SalesQuoteDetail', 'params': {'ID': order.id}}">
+          <grid :cols="3" class="grid-order">
+            <grid-item label="订单日期">
+              {{order.billDate}}
+            </grid-item>
+            <grid-item label="销售人员">
+              {{order.staffName}}
+            </grid-item>
+            <grid-item label="客户">
+              {{order.contactName}}
+            </grid-item>
+            <grid-item label="销售金额">
+              {{order.totalAmount + ' ' + order.currencyCode}}
+            </grid-item>
+            <grid-item label="数量">
+              {{order.totalQty}}
+            </grid-item>
+            <grid-item label="交货周期/天">
+              {{order.deliveryDate}}
+            </grid-item>
+            <grid-item label="制单人">
+              {{order.userName}}
+            </grid-item>
+            <grid-item label="审核人">
+              {{order.checkName || '未设置'}}
+            </grid-item>
+            <grid-item label="备注">
+              {{order.description || '未设置'}}
+            </grid-item>
+          </grid>
+        </router-link>
       </group>
     </template>
 

@@ -33,10 +33,12 @@
           },
           Sales: {
             SalesQuote: {
-              fetchURL: '/index.php/api/SalesQuote/fetch'
+              fetchURL: '/index.php/api/SalesQuote/fetch',
+              detailURL: '/index.php/api/SalesQuote/detail'
             },
             SalesOrder: {
-              fetchURL: '/index.php/api/SalesOrder/fetch'
+              fetchURL: '/index.php/api/SalesOrder/fetch',
+              detailURL: '/index.php/api/SalesOrder/detail'
             },
             SalesReturn: {
               fetchURL: '/index.php/api/SalesReturn/fetch'
