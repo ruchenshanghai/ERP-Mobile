@@ -20,23 +20,25 @@
 
     <template v-for="order in displayList">
       <group :title="'单据编号: ' + order.billNo + ' 业务类别: ' + order.transTypeName">
-        <grid :cols="3" class="grid-order">
-          <grid-item label="单据日期">
-            {{order.billDate}}
-          </grid-item>
-          <grid-item label="客户">
-            {{order.contactName}}
-          </grid-item>
-          <grid-item label="制单人">
-            {{order.userName}}
-          </grid-item>
-          <grid-item label="审核人">
-            {{order.checkName || '未设置'}}
-          </grid-item>
-          <grid-item label="备注">
-            {{order.description || '未设置'}}
-          </grid-item>
-        </grid>
+        <router-link :to="{'name': 'OtherOutboundDetail', 'params': {'ID': order.id}}">
+          <grid :cols="3" class="grid-order">
+            <grid-item label="单据日期">
+              {{order.billDate}}
+            </grid-item>
+            <grid-item label="客户">
+              {{order.contactName}}
+            </grid-item>
+            <grid-item label="制单人">
+              {{order.userName}}
+            </grid-item>
+            <grid-item label="审核人">
+              {{order.checkName || '未设置'}}
+            </grid-item>
+            <grid-item label="备注">
+              {{order.description || '未设置'}}
+            </grid-item>
+          </grid>
+        </router-link>
       </group>
     </template>
 
