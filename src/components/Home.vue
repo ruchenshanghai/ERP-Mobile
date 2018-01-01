@@ -49,16 +49,20 @@
               fetchURL: 'http://localhost/api/AllocationList/fetch'
             },
             PurchaseInbound: {
-              fetchURL: 'http://localhost/api/PurchaseInbound/fetch'
+              fetchURL: 'http://localhost/api/PurchaseInbound/fetch',
+              detailURL: 'http://localhost/api/PurchaseInbound/detail'
             },
             SalesOutbound: {
-              fetchURL: 'http://localhost/api/SalesOutbound/fetch'
+              fetchURL: 'http://localhost/api/SalesOutbound/fetch',
+              detailURL: 'http://localhost/api/SalesOutbound/detail'
             },
             OtherInbound: {
-              fetchURL: 'http://localhost/api/OtherInbound/fetch'
+              fetchURL: 'http://localhost/api/OtherInbound/fetch',
+              detailURL: 'http://localhost/api/OtherInbound/detail'
             },
             OtherOutbound: {
-              fetchURL: 'http://localhost/api/OtherOutbound/fetch'
+              fetchURL: 'http://localhost/api/OtherOutbound/fetch',
+              detailURL: 'http://localhost/api/OtherOutbound/detail'
             }
           }
         }

@@ -1,34 +1,10 @@
 <template>
 
   <div>
-    <group :title="'订单编号: ' + orderDetail.billNo">
+    <group :title="'单据编号: ' + orderDetail.billNo">
       <grid :cols="3" class="grid-order">
-        <grid-item label="供应商">
-          {{orderDetail.contactName}}
-        </grid-item>
-        <grid-item label="收货仓库">
-          {{orderDetail.locationName || '未设置'}}
-        </grid-item>
         <grid-item label="单据日期">
           {{orderDetail.date}}
-        </grid-item>
-        <grid-item label="交货日期">
-          {{(orderDetail.deliveryDate || '未设置') + ' 天'}}
-        </grid-item>
-        <grid-item label="币种">
-          {{orderDetail.currencyText}}
-        </grid-item>
-        <grid-item label="支付方式">
-          {{orderDetail.paymentMethod || '未设置'}}
-        </grid-item>
-        <grid-item label="交货方式">
-          {{orderDetail.shippingMethod || '未设置'}}
-        </grid-item>
-        <grid-item label="结算账户">
-          {{orderDetail.account || '未设置'}}
-        </grid-item>
-        <grid-item label="优惠后金额">
-          {{orderDetail.totalAmount}}
         </grid-item>
         <grid-item label="备注">
           {{orderDetail.description || '未设置'}}
@@ -40,7 +16,7 @@
           {{orderDetail.checkName || '未设置'}}
         </grid-item>
         <grid-item label="最后修改日期">
-          {{orderDetail.modifyTime}}
+          {{orderDetail.modifyTime || '未设置'}}
         </grid-item>
       </grid>
     </group>
@@ -52,25 +28,22 @@
             {{item.goods}}
           </grid-item>
           <grid-item label="商品型号">
-            {{item.spec}}
+            {{item.invSpec}}
           </grid-item>
           <grid-item label="单位">
             {{item.mainUnit}}
           </grid-item>
-          <grid-item label="数量">
+          <grid-item label="采购数量">
             {{item.qty}}
           </grid-item>
-          <grid-item label="采购单价">
-            {{item.price}}
+          <grid-item label="仓库">
+            {{item.locationName}}
           </grid-item>
-          <grid-item label="折扣率">
-            {{item.discountRate + '%'}}
+          <grid-item label="入库数量">
+            {{item.stockinQty}}
           </grid-item>
-          <grid-item label="折扣额">
-            {{item.deduction}}
-          </grid-item>
-          <grid-item label="采购金额">
-            {{item.amount}}
+          <grid-item label="备注">
+            {{item.description || '未设置'}}
           </grid-item>
         </grid>
       </group>
@@ -80,9 +53,10 @@
 </template>
 
 <script>
-  import {Group, Grid, GridItem} from 'vux'
+  import { Group, Grid, GridItem } from 'vux'
+
   export default {
-    name: 'purchase-order-detail',
+    name: 'purchase-inbound-detail',
     directives: {},
     components: {
       Group,
@@ -102,7 +76,7 @@
       postData.fetchConfig = {
         id: orderID
       }
-      this.$http.post(this.config.Purchase.PurchaseOrder.detailURL, postData).then(orderRes => {
+      this.$http.post(this.config.Warehouse.PurchaseInbound.detailURL, postData).then(orderRes => {
         orderRes = orderRes.data
         if (!orderRes.status) {
           this.$router.push('Index')
@@ -113,7 +87,6 @@
           return
         }
         this.orderDetail = orderRes.info
-        console.log(JSON.stringify(this.orderDetail))
       })
     },
 
@@ -129,3 +102,4 @@
     margin-bottom: 20px;
   }
 </style>
+
