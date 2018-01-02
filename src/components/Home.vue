@@ -19,6 +19,9 @@
           isLogin: false
         },
         config: {
+          AssistData: {
+            fetchURL: '/index.php/api/AssistData/fetch'
+          },
           Staff: {
             validateURL: '/index.php/api/Staff/validate'
           },

@@ -53,6 +53,16 @@
           self.loginText = 'Processing'
           // md5 encrypt
           self.propUser.password = md5(self.propUser.password)
+//          self.$http.post('http://localhost/index.php/api/AssistData/fetch', {
+//            userName: self.propUser.userName,
+//            password: self.propUser.password,
+//            fetchConfig: {
+//              typeNumber: 'PayMethod',
+//              isDelete: 2
+//            }
+//          }).then(res => {
+//            console.log(JSON.stringify(res.data))
+//          })
           self.$http.post(self.config.Staff.validateURL, {
             userName: self.propUser.userName,
             password: self.propUser.password
