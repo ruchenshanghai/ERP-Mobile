@@ -175,9 +175,20 @@
       if (!this.user.isLogin) {
         this.$router.push('Login')
       }
+      this.$http.post(this.config.AssistData.PayMethodURL, {
+        userName: this.user.userName,
+        password: this.user.password,
+        fetchConfig: {
+          typeNumber: 'PayMethod',
+          isDelete: 2
+        }
+      }).then(res => {
+        // console.log(JSON.stringify(res.data))
+        this.$emit('resPayMethod', res.data.info.items)
+      })
     },
     methods: { },
-    props: ['user']
+    props: ['user', 'config']
   }
 </script>
 

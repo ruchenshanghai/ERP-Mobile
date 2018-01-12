@@ -3,7 +3,7 @@
     <v-header :user="user" @reset="resetUser"></v-header>
     <div class="content">
       <transition name="move" mode="out-in">
-        <router-view :config="config" :user="user" @resLoginUser="resLogin"></router-view>
+        <router-view :config="config" :user="user" @resLoginUser="resLogin" @resPayMethod="resPayMethod"></router-view>
       </transition>
     </div>
   </div>
@@ -11,6 +11,7 @@
 
 <script>
   import vHeader from './Header.vue'
+  import apiConfig from '../../config/dev.api'
 
   export default {
     data () {
@@ -18,53 +19,7 @@
         user: {
           isLogin: false
         },
-        config: {
-          AssistData: {
-            fetchURL: '/index.php/api/AssistData/fetch'
-          },
-          Staff: {
-            validateURL: '/index.php/api/Staff/validate'
-          },
-          Purchase: {
-            PurchaseOrder: {
-              fetchURL: '/index.php/api/PurchaseOrder/fetch',
-              detailURL: '/index.php/api/PurchaseOrder/detail'
-            },
-            PurchaseReturn: {
-              fetchURL: '/index.php/api/PurchaseReturn/fetch'
-            }
-          },
-          Sales: {
-            SalesQuote: {
-              fetchURL: '/index.php/api/SalesQuote/fetch',
-              detailURL: '/index.php/api/SalesQuote/detail'
-            },
-            SalesOrder: {
-              fetchURL: '/index.php/api/SalesOrder/fetch',
-              detailURL: '/index.php/api/SalesOrder/detail'
-            },
-            SalesReturn: {
-              fetchURL: '/index.php/api/SalesReturn/fetch'
-            }
-          },
-          Warehouse: {
-            AllocationList: {
-              fetchURL: '/index.php/api/AllocationList/fetch'
-            },
-            PurchaseInbound: {
-              fetchURL: '/index.php/api/PurchaseInbound/fetch'
-            },
-            SalesOutbound: {
-              fetchURL: '/index.php/api/SalesOutbound/fetch'
-            },
-            OtherInbound: {
-              fetchURL: '/index.php/api/OtherInbound/fetch'
-            },
-            OtherOutbound: {
-              fetchURL: '/index.php/api/OtherOutbound/fetch'
-            }
-          }
-        }
+        config: apiConfig
       }
     },
     components: {
@@ -92,6 +47,9 @@
         this.user.password = ''
         this.user.email = ''
         this.user.mobile = ''
+      },
+      resPayMethod (resData) {
+        this.config.PayMethod = resData
       }
     }
   }

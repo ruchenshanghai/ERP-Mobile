@@ -1,0 +1,151 @@
+{
+  "status": true,
+  "info": {
+    "items": [
+      {
+        "detail": true,
+        "id": 3,
+        "level": "1",
+        "name": "现金",
+        "parentId": 0,
+        "remark": "",
+        "sortIndex": 0,
+        "status": 0,
+        "typeNumber": "PayMethod"
+      },
+      {
+        "detail": true,
+        "id": 4,
+        "level": "1",
+        "name": "现金支票",
+        "parentId": 0,
+        "remark": "",
+        "sortIndex": 0,
+        "status": 0,
+        "typeNumber": "PayMethod"
+      },
+      {
+        "detail": true,
+        "id": 10,
+        "level": "1",
+        "name": "转账支票",
+        "parentId": 0,
+        "remark": "",
+        "sortIndex": 0,
+        "status": 0,
+        "typeNumber": "PayMethod"
+      },
+      {
+        "detail": true,
+        "id": 11,
+        "level": "1",
+        "name": "信汇",
+        "parentId": 0,
+        "remark": "",
+        "sortIndex": 0,
+        "status": 0,
+        "typeNumber": "PayMethod"
+      },
+      {
+        "detail": true,
+        "id": 12,
+        "level": "1",
+        "name": "电汇",
+        "parentId": 0,
+        "remark": "",
+        "sortIndex": 0,
+        "status": 0,
+        "typeNumber": "PayMethod"
+      },
+      {
+        "detail": true,
+        "id": 80,
+        "level": "1",
+        "name": "预付款",
+        "parentId": 0,
+        "remark": "",
+        "sortIndex": 0,
+        "status": 0,
+        "typeNumber": "PayMethod"
+      },
+      {
+        "detail": true,
+        "id": 81,
+        "level": "1",
+        "name": "货到付款",
+        "parentId": 0,
+        "remark": "",
+        "sortIndex": 0,
+        "status": 0,
+        "typeNumber": "PayMethod"
+      },
+      {
+        "detail": true,
+        "id": 82,
+        "level": "1",
+        "name": "签订合同付70%，验收后付30%",
+        "parentId": 0,
+        "remark": "",
+        "sortIndex": 0,
+        "status": 0,
+        "typeNumber": "PayMethod"
+      },
+      {
+        "detail": true,
+        "id": 85,
+        "level": "1",
+        "name": "T/T In Advance",
+        "parentId": 0,
+        "remark": "",
+        "sortIndex": 0,
+        "status": 0,
+        "typeNumber": "PayMethod"
+      },
+      {
+        "detail": true,
+        "id": 88,
+        "level": "1",
+        "name": "款到发货",
+        "parentId": 0,
+        "remark": "",
+        "sortIndex": 0,
+        "status": 0,
+        "typeNumber": "PayMethod"
+      },
+      {
+        "detail": true,
+        "id": 90,
+        "level": "1",
+        "name": "安装验收完成付90%，10%质保金1年后付款",
+        "parentId": 0,
+        "remark": "",
+        "sortIndex": 0,
+        "status": 0,
+        "typeNumber": "PayMethod"
+      },
+      {
+        "detail": true,
+        "id": 92,
+        "level": "1",
+        "name": "预付50%，货到验收50%",
+        "parentId": 0,
+        "remark": "",
+        "sortIndex": 0,
+        "status": 0,
+        "typeNumber": "PayMethod"
+      },
+      {
+        "detail": true,
+        "id": 1,
+        "level": "1",
+        "name": "人民币",
+        "parentId": 0,
+        "remark": "",
+        "sortIndex": 0,
+        "status": 0,
+        "typeNumber": "PayMethod"
+      }
+    ],
+    "totalsize": 13
+  }
+}

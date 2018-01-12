@@ -16,7 +16,7 @@
           {{orderDetail.currencyText}}
         </grid-item>
         <grid-item label="支付方式">
-          {{(orderDetail.paymentMethod !== -1) ? orderDetail.paymentMethod : '未设置'}}
+          {{parseFunction.getNameByID(this.config.PayMethod, orderDetail.paymentMethod)}}
         </grid-item>
         <grid-item label="交货方式">
           {{(orderDetail.shippingMethod !== -1) ? orderDetail.shippingMethod : '未设置'}}
@@ -87,9 +87,10 @@
 
 <script>
   import { Group, Grid, GridItem } from 'vux'
+  import parseFunction from '../../utils/parseText'
 
   export default {
-    name: 'purchase-quote-detail',
+    name: 'sales-quote-detail',
     directives: {},
     components: {
       Group,
@@ -98,11 +99,12 @@
     },
     data () {
       return {
-        orderDetail: {}
+        orderDetail: {},
+        parseFunction: parseFunction
       }
     },
     created () {
-      console.log('get purchase order ID: ' + this.$route.params.ID)
+      console.log('get sales quote ID: ' + this.$route.params.ID)
       let orderID = this.$route.params.ID
       let postData = {}
       postData.userName = this.user.userName
@@ -121,7 +123,7 @@
           return
         }
         this.orderDetail = orderRes.info
-        console.log(JSON.stringify(this.orderDetail))
+        // console.log(JSON.stringify(this.orderDetail))
       })
     },
 

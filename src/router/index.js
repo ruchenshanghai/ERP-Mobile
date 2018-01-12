@@ -16,9 +16,13 @@ import SalesReturnQuery from '@/components/Sales/SalesReturnQuery'
 
 import AllocationListQuery from '@/components/Warehouse/AllocationListQuery'
 import PurchaseInboundQuery from '@/components/Warehouse/PurchaseInboundQuery'
+import PurchaseInboundDetail from '@/components/Warehouse/PurchaseInboundDetail'
 import SalesOutboundQuery from '@/components/Warehouse/SalesOutboundQuery'
+import SalesOutboundDetail from '@/components/Warehouse/SalesOutboundDetail'
 import OtherInboundQuery from '@/components/Warehouse/OtherInboundQuery'
+import OtherInboundDetail from '@/components/Warehouse/OtherInboundDetail'
 import OtherOutboundQuery from '@/components/Warehouse/OtherOutboundQuery'
+import OtherOutboundDetail from '@/components/Warehouse/OtherOutboundDetail'
 
 Vue.use(Router)
 
@@ -98,9 +102,19 @@ export default new Router({
           component: PurchaseInboundQuery
         },
         {
+          name: 'PurchaseInboundDetail',
+          path: '/PurchaseInboundDetail/:ID',
+          component: PurchaseInboundDetail
+        },
+        {
           name: 'SalesOutboundQuery',
           path: '/SalesOutboundQuery',
           component: SalesOutboundQuery
+        },
+        {
+          name: 'SalesOutboundDetail',
+          path: '/SalesOutboundDetail/:ID',
+          component: SalesOutboundDetail
         },
         {
           name: 'OtherInboundQuery',
@@ -108,9 +122,19 @@ export default new Router({
           component: OtherInboundQuery
         },
         {
+          name: 'OtherInboundDetail',
+          path: '/OtherInboundDetail/:ID',
+          component: OtherInboundDetail
+        },
+        {
           name: 'OtherOutboundQuery',
           path: '/OtherOutboundQuery',
           component: OtherOutboundQuery
+        },
+        {
+          name: 'OtherOutboundDetail',
+          path: '/OtherOutboundDetail/:ID',
+          component: OtherOutboundDetail
         },
         {
           path: '*',
