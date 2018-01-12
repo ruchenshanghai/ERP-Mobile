@@ -3,7 +3,7 @@
     <v-header :user="user" @reset="resetUser"></v-header>
     <div class="content">
       <transition name="move" mode="out-in">
-        <router-view :config="config" :user="user" @resLoginUser="resLogin"></router-view>
+        <router-view :config="config" :user="user" @resLoginUser="resLogin" @resPayMethod="resPayMethod"></router-view>
       </transition>
     </div>
   </div>
@@ -11,6 +11,7 @@
 
 <script>
   import vHeader from './Header.vue'
+  import apiConfig from '../../config/dev.api'
 
   export default {
     data () {
@@ -18,54 +19,8 @@
         user: {
           isLogin: false
         },
-        config: {
-          Staff: {
-            validateURL: 'http://localhost/api/Staff/validate'
-          },
-          Purchase: {
-            PurchaseOrder: {
-              fetchURL: 'http://localhost/api/PurchaseOrder/fetch',
-              detailURL: 'http://localhost/api/PurchaseOrder/detail'
-            },
-            PurchaseReturn: {
-              fetchURL: 'http://localhost/api/PurchaseReturn/fetch'
-            }
-          },
-          Sales: {
-            SalesQuote: {
-              fetchURL: 'http://localhost/api/SalesQuote/fetch',
-              detailURL: 'http://localhost/api/SalesQuote/detail'
-            },
-            SalesOrder: {
-              fetchURL: 'http://localhost/api/SalesOrder/fetch',
-              detailURL: 'http://localhost/api/SalesOrder/detail'
-            },
-            SalesReturn: {
-              fetchURL: 'http://localhost/api/SalesReturn/fetch'
-            }
-          },
-          Warehouse: {
-            AllocationList: {
-              fetchURL: 'http://localhost/api/AllocationList/fetch'
-            },
-            PurchaseInbound: {
-              fetchURL: 'http://localhost/api/PurchaseInbound/fetch',
-              detailURL: 'http://localhost/api/PurchaseInbound/detail'
-            },
-            SalesOutbound: {
-              fetchURL: 'http://localhost/api/SalesOutbound/fetch',
-              detailURL: 'http://localhost/api/SalesOutbound/detail'
-            },
-            OtherInbound: {
-              fetchURL: 'http://localhost/api/OtherInbound/fetch',
-              detailURL: 'http://localhost/api/OtherInbound/detail'
-            },
-            OtherOutbound: {
-              fetchURL: 'http://localhost/api/OtherOutbound/fetch',
-              detailURL: 'http://localhost/api/OtherOutbound/detail'
-            }
-          }
-        }
+        config: apiConfig
+
       }
     },
     components: {
@@ -93,6 +48,9 @@
         this.user.password = ''
         this.user.email = ''
         this.user.mobile = ''
+      },
+      resPayMethod (resData) {
+        this.config.PayMethod = resData
       }
     }
   }

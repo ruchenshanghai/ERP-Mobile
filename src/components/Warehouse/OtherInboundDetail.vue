@@ -87,6 +87,9 @@
           return
         }
         this.orderDetail = orderRes.info
+
+        // console.log(JSON.stringify(this.orderDetail))
+
       })
     },
 
