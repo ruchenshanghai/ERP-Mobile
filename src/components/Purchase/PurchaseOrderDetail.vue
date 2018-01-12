@@ -97,7 +97,6 @@
       }
     },
     created () {
-      console.log('get purchase order ID: ' + this.$route.params.ID)
       let orderID = this.$route.params.ID
       let postData = {}
       postData.userName = this.user.userName
@@ -116,7 +115,9 @@
           return
         }
         this.orderDetail = orderRes.info
+
         // console.log(JSON.stringify(this.orderDetail))
+
       })
     },
 

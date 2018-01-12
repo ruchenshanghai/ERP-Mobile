@@ -20,6 +20,7 @@
           isLogin: false
         },
         config: apiConfig
+
       }
     },
     components: {
