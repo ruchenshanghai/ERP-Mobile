@@ -1,7 +1,8 @@
 let APIUri = {
   AssistData: {
     PayMethodURL: '/index.php/api/AssistData/PayMethod',
-    ShippingMethodURL: '/index.php/api/AssistData/ShippingMethod'
+    ShippingMethodURL: '/index.php/api/AssistData/ShippingMethod',
+    AccountURL: '/index.php/api/AssistData/Account'
   },
   Staff: {
     validateURL: '/index.php/api/Staff/validate'
@@ -49,7 +50,9 @@ let APIUri = {
       detailURL: '/index.php/api/OtherOutbound/detail'
     }
   },
-  PayMethod: []
+  PayMethod: [],
+  ShippingMethod: [],
+  Account: []
 }
 
 export default APIUri

@@ -1,0 +1,1 @@
+http://localhost/index.php/basedata/contact?action=list&simple=1&type=10&isDelete=2&clear=0.9098003181896548&rows=5000

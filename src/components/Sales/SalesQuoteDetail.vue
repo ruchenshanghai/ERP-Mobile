@@ -16,15 +16,13 @@
           {{orderDetail.currencyText}}
         </grid-item>
         <grid-item label="支付方式">
-
           {{parseFunction.getNameByID(this.config.PayMethod, orderDetail.paymentMethod)}}
-
         </grid-item>
         <grid-item label="交货方式">
-          {{(orderDetail.shippingMethod !== -1) ? orderDetail.shippingMethod : '未设置'}}
+          {{parseFunction.getNameByID(this.config.ShippingMethod, orderDetail.shippingMethod)}}
         </grid-item>
         <grid-item label="结算账户">
-          {{orderDetail.accountName}}
+          {{parseFunction.getNameByID(this.config.Account, orderDetail.accId)}}
         </grid-item>
         <grid-item label="优惠后金额">
           {{orderDetail.totalAmount}}
@@ -92,7 +90,6 @@
 
   import parseFunction from '../../utils/parseText'
 
-
   export default {
     name: 'sales-quote-detail',
     directives: {},
@@ -130,7 +127,6 @@
         this.orderDetail = orderRes.info
 
         // console.log(JSON.stringify(this.orderDetail))
-
       })
     },
 

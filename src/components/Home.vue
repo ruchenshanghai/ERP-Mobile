@@ -3,7 +3,7 @@
     <v-header :user="user" @reset="resetUser"></v-header>
     <div class="content">
       <transition name="move" mode="out-in">
-        <router-view :config="config" :user="user" @resLoginUser="resLogin" @resPayMethod="resPayMethod"></router-view>
+        <router-view :config="config" :user="user" @resLoginUser="resLogin" @resPayMethod="resPayMethod" @resShippingMethod="resShippingMethod" @resAccount="resAccount"></router-view>
       </transition>
     </div>
   </div>
@@ -51,6 +51,12 @@
       },
       resPayMethod (resData) {
         this.config.PayMethod = resData
+      },
+      resShippingMethod (resData) {
+        this.config.ShippingMethod = resData
+      },
+      resAccount (resData) {
+        this.config.Account = resData
       }
     }
   }

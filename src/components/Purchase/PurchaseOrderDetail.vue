@@ -22,10 +22,10 @@
           {{parseFunction.getNameByID(this.config.PayMethod, orderDetail.paymentMethod)}}
         </grid-item>
         <grid-item label="交货方式">
-          {{orderDetail.shippingMethod || '未设置'}}
+          {{parseFunction.getNameByID(this.config.ShippingMethod, orderDetail.shippingMethod)}}
         </grid-item>
         <grid-item label="结算账户">
-          {{orderDetail.account || '未设置'}}
+          {{parseFunction.getNameByID(this.config.Account, orderDetail.accId)}}
         </grid-item>
         <grid-item label="优惠后金额">
           {{orderDetail.totalAmount}}
@@ -80,8 +80,9 @@
 </template>
 
 <script>
-  import {Group, Grid, GridItem} from 'vux'
+  import { Group, Grid, GridItem } from 'vux'
   import parseFunction from '../../utils/parseText'
+
   export default {
     name: 'purchase-order-detail',
     directives: {},
@@ -116,8 +117,7 @@
         }
         this.orderDetail = orderRes.info
 
-        // console.log(JSON.stringify(this.orderDetail))
-
+//        console.log(JSON.stringify(this.orderDetail))
       })
     },
 

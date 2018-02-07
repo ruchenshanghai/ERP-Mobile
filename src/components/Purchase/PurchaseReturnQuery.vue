@@ -130,7 +130,7 @@
         this.fetchOrderListByConfig()
       },
       handleCurrentPageChange (val) {
-        console.log(val)
+//        console.log(val)
         this.fetchConfig.pageIndex = val
         this.fetchOrderListByConfig()
       }

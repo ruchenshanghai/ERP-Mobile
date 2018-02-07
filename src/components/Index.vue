@@ -183,11 +183,27 @@
           isDelete: 2
         }
       }).then(res => {
-        // console.log(JSON.stringify(res.data))
         this.$emit('resPayMethod', res.data.info.items)
       })
+      this.$http.post(this.config.AssistData.ShippingMethodURL, {
+        userName: this.user.userName,
+        password: this.user.password,
+        fetchConfig: {
+          typeNumber: 'ShippingMethod',
+          isDelete: 2
+        }
+      }).then(res => {
+        this.$emit('resShippingMethod', res.data.info.items)
+      })
+      this.$http.post(this.config.AssistData.AccountURL, {
+        userName: this.user.userName,
+        password: this.user.password
+      }).then(res => {
+//        console.log(res.data.info.items)
+        this.$emit('resAccount', res.data.info.items)
+      })
     },
-    methods: { },
+    methods: {},
     props: ['user', 'config']
   }
 </script>
