@@ -607,7 +607,7 @@ let APIUri = {
     PayMethodURL: '/index.php/api/AssistData/PayMethod',
     ShippingMethodURL: '/index.php/api/AssistData/ShippingMethod',
     AccountURL: '/index.php/api/AssistData/Account',
-    ContactURL: 'http://localhost/index.php/api/AssistData/Contact',
+    ContactURL: '/index.php/api/AssistData/Contact',
     ContactConfig: {
       CustomerType: -10,
       SupplierType: 10
@@ -8389,4 +8389,4 @@ module.exports = Component.exports
 
 /***/ })
 ],[261]);
-//# sourceMappingURL=app.23136c381820d8f2b57a.js.map
+//# sourceMappingURL=app.9f4ab9647fd4ee66c27f.js.map
