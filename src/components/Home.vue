@@ -3,7 +3,7 @@
     <v-header :user="user" @reset="resetUser"></v-header>
     <div class="content">
       <transition name="move" mode="out-in">
-        <router-view :config="config" :user="user" @resLoginUser="resLogin" @resPayMethod="resPayMethod" @resShippingMethod="resShippingMethod" @resAccount="resAccount"></router-view>
+        <router-view :config="config" :user="user" @resLoginUser="resLogin" @resPayMethod="resPayMethod" @resShippingMethod="resShippingMethod" @resAccount="resAccount" @resSupplierContact="resSupplierContact" @resCustomerContact="resCustomerContact"></router-view>
       </transition>
     </div>
   </div>
@@ -11,7 +11,7 @@
 
 <script>
   import vHeader from './Header.vue'
-  import apiConfig from '../../config/dev.api'
+  import apiConfig from '../../config/prd.api'
 
   export default {
     data () {
@@ -57,6 +57,12 @@
       },
       resAccount (resData) {
         this.config.Account = resData
+      },
+      resSupplierContact (resData) {
+        this.config.SupplierContact = resData
+      },
+      resCustomerContact (resData) {
+        this.config.CustomerContact = resData
       }
     }
   }

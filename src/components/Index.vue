@@ -202,6 +202,15 @@
 //        console.log(res.data.info.items)
         this.$emit('resAccount', res.data.info.items)
       })
+      this.$http.post(this.config.AssistData.ContactURL, {
+        userName: this.user.userName,
+        password: this.user.password,
+        fetchConfig: {
+          type: this.config.AssistData.ContactConfig.SupplierType
+        }
+      }).then(res => {
+        this.$emit('resSupplierContact', res.data.info.rows)
+      })
     },
     methods: {},
     props: ['user', 'config']

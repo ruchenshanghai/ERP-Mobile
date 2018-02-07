@@ -2,10 +2,8 @@
 
   <div>
     <group :title="'订单编号: ' + orderDetail.billNo">
+      <selector title="供应商" v-model="orderDetail.contactName" :options="supplierContact"></selector>
       <grid :cols="3" class="grid-order">
-        <grid-item label="供应商">
-          {{orderDetail.contactName}}
-        </grid-item>
         <grid-item label="收货仓库">
           {{orderDetail.locationName || '未设置'}}
         </grid-item>
@@ -80,7 +78,7 @@
 </template>
 
 <script>
-  import { Group, Grid, GridItem } from 'vux'
+  import { Group, Grid, GridItem, Selector } from 'vux'
   import parseFunction from '../../utils/parseText'
 
   export default {
@@ -89,12 +87,14 @@
     components: {
       Group,
       Grid,
-      GridItem
+      GridItem,
+      Selector
     },
     data () {
       return {
         orderDetail: {},
-        parseFunction: parseFunction
+        parseFunction: parseFunction,
+        supplierContact: this.config.SupplierContact
       }
     },
     created () {
@@ -116,8 +116,10 @@
           return
         }
         this.orderDetail = orderRes.info
-
-//        console.log(JSON.stringify(this.orderDetail))
+        for (let index in this.supplierContact) {
+          this.supplierContact[index].key = this.supplierContact[index].name
+          this.supplierContact[index].value = this.supplierContact[index].name
+        }
       })
     },
 

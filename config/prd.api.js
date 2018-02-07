@@ -2,7 +2,12 @@ let APIUri = {
   AssistData: {
     PayMethodURL: '/index.php/api/AssistData/PayMethod',
     ShippingMethodURL: '/index.php/api/AssistData/ShippingMethod',
-    AccountURL: '/index.php/api/AssistData/Account'
+    AccountURL: '/index.php/api/AssistData/Account',
+    ContactURL: 'http://localhost/index.php/api/AssistData/Contact',
+    ContactConfig: {
+      CustomerType: -10,
+      SupplierType: 10
+    }
   },
   Staff: {
     validateURL: '/index.php/api/Staff/validate'
@@ -52,7 +57,9 @@ let APIUri = {
   },
   PayMethod: [],
   ShippingMethod: [],
-  Account: []
+  Account: [],
+  SupplierContact: [],
+  CustomerContact: []
 }
 
 export default APIUri
