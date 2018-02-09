@@ -94,32 +94,38 @@
       return {
         orderDetail: {},
         parseFunction: parseFunction,
-        supplierContact: this.config.SupplierContact
+        supplierContact: []
       }
     },
     created () {
-      let orderID = this.$route.params.ID
-      let postData = {}
-      postData.userName = this.user.userName
-      postData.password = this.user.password
-      postData.fetchConfig = {
-        id: orderID
-      }
-      this.$http.post(this.config.Purchase.PurchaseOrder.detailURL, postData).then(orderRes => {
-        orderRes = orderRes.data
-        if (!orderRes.status) {
-          this.$router.push('Index')
-          return
+      const self = this
+      let assistParams = ['PayMethod', 'ShippingMethod', 'Account', 'SupplierContact', 'CustomerContact', 'Warehouse']
+      self.$emit('resAssistData', assistParams, resData => {
+        console.log(resData)
+        self.supplierContact = self.config.SupplierContact
+        for (let index in self.supplierContact) {
+          self.supplierContact[index].key = self.supplierContact[index].name
+          self.supplierContact[index].value = self.supplierContact[index].name
         }
-        if (orderRes.info === null) {
-          this.$router.go(-1)
-          return
+        let orderID = self.$route.params.ID
+        let postData = {}
+        postData.userName = self.user.userName
+        postData.password = self.user.password
+        postData.fetchConfig = {
+          id: orderID
         }
-        this.orderDetail = orderRes.info
-        for (let index in this.supplierContact) {
-          this.supplierContact[index].key = this.supplierContact[index].name
-          this.supplierContact[index].value = this.supplierContact[index].name
-        }
+        self.$http.post(self.config.Purchase.PurchaseOrder.detailURL, postData).then(orderRes => {
+          orderRes = orderRes.data
+          if (!orderRes.status) {
+            self.$router.push('Index')
+            return
+          }
+          if (orderRes.info === null) {
+            self.$router.go(-1)
+            return
+          }
+          self.orderDetail = orderRes.info
+        })
       })
     },
 

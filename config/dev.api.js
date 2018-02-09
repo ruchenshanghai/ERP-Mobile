@@ -4,6 +4,7 @@ let APIUri = {
     ShippingMethodURL: 'http://localhost/index.php/api/AssistData/ShippingMethod',
     AccountURL: 'http://localhost/index.php/api/AssistData/Account',
     ContactURL: 'http://localhost/index.php/api/AssistData/Contact',
+    WarehouseURL: 'http://localhost/index.php/api/AssistData/Warehouse',
     ContactConfig: {
       CustomerType: -10,
       SupplierType: 10
@@ -59,7 +60,8 @@ let APIUri = {
   ShippingMethod: [],
   Account: [],
   SupplierContact: [],
-  CustomerContact: []
+  CustomerContact: [],
+  Warehouse: []
 }
 
 export default APIUri

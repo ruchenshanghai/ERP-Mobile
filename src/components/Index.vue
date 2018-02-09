@@ -175,42 +175,6 @@
       if (!this.user.isLogin) {
         this.$router.push('Login')
       }
-      this.$http.post(this.config.AssistData.PayMethodURL, {
-        userName: this.user.userName,
-        password: this.user.password,
-        fetchConfig: {
-          typeNumber: 'PayMethod',
-          isDelete: 2
-        }
-      }).then(res => {
-        this.$emit('resPayMethod', res.data.info.items)
-      })
-      this.$http.post(this.config.AssistData.ShippingMethodURL, {
-        userName: this.user.userName,
-        password: this.user.password,
-        fetchConfig: {
-          typeNumber: 'ShippingMethod',
-          isDelete: 2
-        }
-      }).then(res => {
-        this.$emit('resShippingMethod', res.data.info.items)
-      })
-      this.$http.post(this.config.AssistData.AccountURL, {
-        userName: this.user.userName,
-        password: this.user.password
-      }).then(res => {
-//        console.log(res.data.info.items)
-        this.$emit('resAccount', res.data.info.items)
-      })
-      this.$http.post(this.config.AssistData.ContactURL, {
-        userName: this.user.userName,
-        password: this.user.password,
-        fetchConfig: {
-          type: this.config.AssistData.ContactConfig.SupplierType
-        }
-      }).then(res => {
-        this.$emit('resSupplierContact', res.data.info.rows)
-      })
     },
     methods: {},
     props: ['user', 'config']
