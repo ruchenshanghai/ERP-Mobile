@@ -12,7 +12,7 @@
 
 <script>
   import vHeader from './Header.vue'
-  import apiConfig from '../../config/dev.api'
+  import apiConfig from '../../config/prd.api'
 
   export default {
     data () {
@@ -75,75 +75,16 @@
             case 'Currency':
               promiseArray.push(this.fetchCurrency())
               break
+            case 'Inventory':
+              promiseArray.push(this.fetchInventory())
+              break
+            case 'Unit':
+              promiseArray.push(this.fetchInventory())
+              break
           }
         }
         Promise.all(promiseArray).then(result => {
           callback(result)
-        })
-      },
-      fetchPayMethod () {
-        return new Promise((resolve, reject) => {
-          if (this.config.PayMethod.length === 0) {
-            this.$http.post(this.config.AssistData.PayMethodURL, {
-              userName: this.user.userName,
-              password: this.user.password,
-              fetchConfig: {
-                typeNumber: 'PayMethod',
-                isDelete: 2
-              }
-            }).then(res => {
-              this.config.PayMethod = res.data.info.items
-              for (let index in this.config.PayMethod) {
-                this.config.PayMethod[index].key = this.config.PayMethod[index].name
-                this.config.PayMethod[index].value = this.config.PayMethod[index].name
-              }
-              resolve('fetch pay method')
-            })
-          } else {
-            resolve('has fetched pay method')
-          }
-        })
-      },
-      fetchShippingMethod () {
-        return new Promise((resolve, reject) => {
-          if (this.config.ShippingMethod.length === 0) {
-            this.$http.post(this.config.AssistData.ShippingMethodURL, {
-              userName: this.user.userName,
-              password: this.user.password,
-              fetchConfig: {
-                typeNumber: 'ShippingMethod',
-                isDelete: 2
-              }
-            }).then(res => {
-              this.config.ShippingMethod = res.data.info.items
-              for (let index in this.config.ShippingMethod) {
-                this.config.ShippingMethod[index].key = this.config.ShippingMethod[index].name
-                this.config.ShippingMethod[index].value = this.config.ShippingMethod[index].name
-              }
-              resolve('fetch shipping method')
-            })
-          } else {
-            resolve('has fetched shipping method')
-          }
-        })
-      },
-      fetchAccount () {
-        return new Promise((resolve, reject) => {
-          if (this.config.Account.length === 0) {
-            this.$http.post(this.config.AssistData.AccountURL, {
-              userName: this.user.userName,
-              password: this.user.password
-            }).then(res => {
-              this.config.Account = res.data.info.items
-              for (let index in this.config.Account) {
-                this.config.Account[index].key = this.config.Account[index].name
-                this.config.Account[index].value = this.config.Account[index].name
-              }
-              resolve('fetch account')
-            })
-          } else {
-            resolve('has fetched account')
-          }
         })
       },
       fetchSupplierContact () {
@@ -186,25 +127,6 @@
           }
         })
       },
-      fetchWarehouse () {
-        return new Promise((resolve, reject) => {
-          if (this.config.Account.length === 0) {
-            this.$http.post(this.config.AssistData.WarehouseURL, {
-              userName: this.user.userName,
-              password: this.user.password
-            }).then(res => {
-              this.config.Warehouse = res.data.info.rows
-              for (let index in this.config.Warehouse) {
-                this.config.Warehouse[index].key = this.config.Warehouse[index].name
-                this.config.Warehouse[index].value = this.config.Warehouse[index].name
-              }
-              resolve('fetch warehouse')
-            })
-          } else {
-            resolve('has fetched warehouse')
-          }
-        })
-      },
       fetchCurrency () {
         return new Promise((resolve, reject) => {
           if (this.config.Account.length === 0) {
@@ -221,6 +143,128 @@
             })
           } else {
             resolve('has fetched currency')
+          }
+        })
+      },
+      fetchUnit () {
+        return new Promise((resolve, reject) => {
+          if (this.config.Account.length === 0) {
+            this.$http.post(this.config.AssistData.Unit, {
+              userName: this.user.userName,
+              password: this.user.password
+            }).then(res => {
+              this.config.Unit = res.data.info.items
+              for (let index in this.config.Unit) {
+                this.config.Unit[index].key = this.config.Unit[index].name
+                this.config.Unit[index].value = this.config.Unit[index].name
+              }
+              resolve('fetch unit')
+            })
+          } else {
+            resolve('has fetched unit')
+          }
+        })
+      },
+      fetchPayMethod () {
+        return new Promise((resolve, reject) => {
+          if (this.config.PayMethod.length === 0) {
+            this.$http.post(this.config.AssistData.PayMethodURL, {
+              userName: this.user.userName,
+              password: this.user.password,
+              fetchConfig: {
+                typeNumber: 'PayMethod',
+                isDelete: 2
+              }
+            }).then(res => {
+              this.config.PayMethod = res.data.info.items
+              for (let index in this.config.PayMethod) {
+                this.config.PayMethod[index].key = this.config.PayMethod[index].id
+                this.config.PayMethod[index].value = this.config.PayMethod[index].name
+              }
+              resolve('fetch pay method')
+            })
+          } else {
+            resolve('has fetched pay method')
+          }
+        })
+      },
+      fetchShippingMethod () {
+        return new Promise((resolve, reject) => {
+          if (this.config.ShippingMethod.length === 0) {
+            this.$http.post(this.config.AssistData.ShippingMethodURL, {
+              userName: this.user.userName,
+              password: this.user.password,
+              fetchConfig: {
+                typeNumber: 'ShippingMethod',
+                isDelete: 2
+              }
+            }).then(res => {
+              this.config.ShippingMethod = res.data.info.items
+              for (let index in this.config.ShippingMethod) {
+                this.config.ShippingMethod[index].key = this.config.ShippingMethod[index].id
+                this.config.ShippingMethod[index].value = this.config.ShippingMethod[index].name
+              }
+              resolve('fetch shipping method')
+            })
+          } else {
+            resolve('has fetched shipping method')
+          }
+        })
+      },
+      fetchAccount () {
+        return new Promise((resolve, reject) => {
+          if (this.config.Account.length === 0) {
+            this.$http.post(this.config.AssistData.AccountURL, {
+              userName: this.user.userName,
+              password: this.user.password
+            }).then(res => {
+              this.config.Account = res.data.info.items
+              for (let index in this.config.Account) {
+                this.config.Account[index].key = this.config.Account[index].id
+                this.config.Account[index].value = this.config.Account[index].name
+              }
+              resolve('fetch account')
+            })
+          } else {
+            resolve('has fetched account')
+          }
+        })
+      },
+      fetchWarehouse () {
+        return new Promise((resolve, reject) => {
+          if (this.config.Account.length === 0) {
+            this.$http.post(this.config.AssistData.WarehouseURL, {
+              userName: this.user.userName,
+              password: this.user.password
+            }).then(res => {
+              this.config.Warehouse = res.data.info.rows
+              for (let index in this.config.Warehouse) {
+                this.config.Warehouse[index].key = this.config.Warehouse[index].id
+                this.config.Warehouse[index].value = this.config.Warehouse[index].name
+              }
+              resolve('fetch warehouse')
+            })
+          } else {
+            resolve('has fetched warehouse')
+          }
+        })
+      },
+      fetchInventory () {
+        return new Promise((resolve, reject) => {
+          if (this.config.Account.length === 0) {
+            this.$http.post(this.config.AssistData.InventoryURL, {
+              userName: this.user.userName,
+              password: this.user.password
+            }).then(res => {
+              this.config.Inventory = res.data.info.rows
+              for (let index in this.config.Inventory) {
+                this.config.Inventory[index].key = this.config.Inventory[index].id
+                this.config.Inventory[index].value = this.config.Inventory[index].name
+              }
+              resolve('fetch inventory')
+            })
+          } else {
+            resolve('has fetched inventory')
           }
         })
       }

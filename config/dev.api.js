@@ -9,7 +9,9 @@ let APIUri = {
       SupplierType: 10
     },
     WarehouseURL: 'http://localhost/index.php/api/AssistData/Warehouse',
-    CurrencyURL: 'http://localhost/index.php/api/AssistData/Currency'
+    CurrencyURL: 'http://localhost/index.php/api/AssistData/Currency',
+    InventoryURL: 'http://localhost/index.php/api/AssistData/Inventory',
+    UnitURL: 'http://localhost/index.php/api/AssistData/Unit'
   },
   Staff: {
     validateURL: 'http://localhost/index.php/api/Staff/validate'
@@ -62,7 +64,9 @@ let APIUri = {
   Account: [],
   SupplierContact: [],
   CustomerContact: [],
-  Warehouse: []
+  Warehouse: [],
+  Inventory: [],
+  Unit: []
 }
 
 export default APIUri
