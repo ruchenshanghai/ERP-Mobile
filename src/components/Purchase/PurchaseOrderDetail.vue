@@ -14,12 +14,10 @@
 
       <grid :cols="3" class="grid-order">
         <grid-item label="优惠率(%)">
-          <x-input type="number" v-model="orderDetail.disRate" @on-enter="updateAmountByDisRate"></x-input>
-          <div class="detail-wrapper"><span class="title">回车确认</span></div>
+          <x-input type="number" v-model="orderDetail.disRate" @on-blur="updateAmountByDisRate"></x-input>
         </grid-item>
         <grid-item label="优惠金额">
-          <x-input v-model="orderDetail.disAmount" type="number" @on-enter="updateAmountByDisAmount"></x-input>
-          <div class="detail-wrapper"><span class="title">回车确认</span></div>
+          <x-input v-model="orderDetail.disAmount" type="number" @on-blur="updateAmountByDisAmount"></x-input>
         </grid-item>
         <grid-item label="优惠后金额">
           {{orderDetail.amount}}
@@ -38,10 +36,8 @@
 
     <template v-for="(item, $index) in orderDetail.entries">
       <group :title="'详情: ' + ($index + 1)">
+        <selector title="商品名称" v-model="item.invId" :options="inventory" @on-change="updateInventory"></selector>
         <grid :cols="3" class="grid-order">
-          <grid-item label="商品名称">
-            <selector v-model="item.invId" :options="inventory" @on-change="updateInventory($index)"></selector>
-          </grid-item>
           <grid-item label="商品型号">
             {{item.inventory.spec}}
           </grid-item>
@@ -49,19 +45,16 @@
             {{item.inventory.unitName}}
           </grid-item>
           <grid-item label="采购单价">
-            <x-input type="number" v-model="item.price"></x-input>
+            <x-input type="number" v-model="item.price" @on-blur="updateDetailAmount($index)"></x-input>
           </grid-item>
           <grid-item label="数量">
-            <x-input type="number" v-model="item.qty"></x-input>
+            <x-input type="number" v-model="item.qty" @on-blur="updateDetailAmount($index)"></x-input>
           </grid-item>
           <grid-item label="折扣率(%)">
-            <x-input type="number" v-model="item.discountRate"
-                     @on-enter="updateDetailAmountByDisRate($index)"></x-input>
-            <div class="detail-wrapper"><span class="title">回车确认</span></div>
+            <x-input type="number" v-model="item.discountRate" @on-blur="updateDetailAmountByDisRate($index)"></x-input>
           </grid-item>
           <grid-item label="折扣额">
-            <x-input type="number" v-model="item.deduction" @on-enter="updateDetailAmountByDeduction($index)"></x-input>
-            <div class="detail-wrapper"><span class="title">回车确认</span></div>
+            <x-input type="number" v-model="item.deduction" @on-blur="updateDetailAmountByDeduction($index)"></x-input>
           </grid-item>
         </grid>
         <x-input title="采购金额" type="number" v-model="item.amount" readonly></x-input>
@@ -72,13 +65,13 @@
 </template>
 
 <script>
-  import { Group, Grid, GridItem, Selector, Datetime, XInput } from 'vux'
+  import { Group, Grid, GridItem, Selector, Datetime, XInput, XButton } from 'vux'
   import parseFunction from '../../utils/parseText'
 
   export default {
     name: 'purchase-order-detail',
     directives: {},
-    components: {Group, Grid, GridItem, Selector, Datetime, XInput},
+    components: { Group, Grid, GridItem, Selector, Datetime, XInput, XButton },
     data () {
       return {
         orderDetail: {},
@@ -136,13 +129,13 @@
           this.orderDetail.disRate = 100
         }
         this.orderDetail.disAmount = (this.orderDetail.totalAmount * this.orderDetail.disRate / 100).toFixed(2)
-        this.orderDetail.amount = this.orderDetail.totalAmount - this.orderDetail.disAmount
+        this.orderDetail.amount = (this.orderDetail.totalAmount - this.orderDetail.disAmount).toFixed(2)
       },
       updateAmountByDisAmount (val) {
         if (val > this.orderDetail.totalAmount) {
           this.orderDetail.disAmount = this.orderDetail.totalAmount
         }
-        this.orderDetail.amount = this.orderDetail.totalAmount - this.orderDetail.disAmount
+        this.orderDetail.amount = (this.orderDetail.totalAmount - this.orderDetail.disAmount).toFixed(2)
         this.orderDetail.disRate = (this.orderDetail.disAmount / this.orderDetail.totalAmount * 100).toFixed(2)
       },
       parseOrderDetailInventory () {
@@ -155,25 +148,36 @@
           }
         }
       },
-      updateInventory (index) {
-        for (let i = 0; i < this.inventory.length; i++) {
-          if (this.inventory[i].id === this.orderDetail.entries[index].invId) {
-            this.orderDetail.entries[index].inventory = this.inventory[i]
+      updateInventory () {
+        for (let item in this.orderDetail.entries) {
+          if (this.orderDetail.entries[item].invId !== this.orderDetail.entries[item].inventory.id) {
+            for (let i = 0; i < this.inventory.length; i++) {
+              if (this.inventory[i].id === this.orderDetail.entries[item].invId) {
+                this.orderDetail.entries[item].inventory = this.inventory[i]
+                this.orderDetail.entries[item].price = this.inventory[i].purPrice
+                this.updateDetailAmount(item)
+                break
+              }
+            }
           }
         }
+      },
+      updateDetailAmount (index) {
+        this.orderDetail.entries[index].deduction = (this.orderDetail.entries[index].price * this.orderDetail.entries[index].qty * this.orderDetail.entries[index].discountRate / 100).toFixed(2)
+        this.orderDetail.entries[index].amount = (this.orderDetail.entries[index].price * this.orderDetail.entries[index].qty - this.orderDetail.entries[index].deduction).toFixed(2)
       },
       updateDetailAmountByDisRate (index) {
         if (this.orderDetail.entries[index].discountRate > 100) {
           this.orderDetail.entries[index].discountRate = 100
         }
         this.orderDetail.entries[index].deduction = (this.orderDetail.entries[index].qty * this.orderDetail.entries[index].price * this.orderDetail.entries[index].discountRate / 100).toFixed(2)
-        this.orderDetail.entries[index].amount = this.orderDetail.entries[index].qty * this.orderDetail.entries[index].price - this.orderDetail.entries[index].deduction
+        this.orderDetail.entries[index].amount = (this.orderDetail.entries[index].qty * this.orderDetail.entries[index].price - this.orderDetail.entries[index].deduction).toFixed(2)
       },
       updateDetailAmountByDeduction (index) {
         if (this.orderDetail.entries[index].deduction > (this.orderDetail.entries[index].qty * this.orderDetail.entries[index].price)) {
           this.orderDetail.entries[index].deduction = (this.orderDetail.entries[index].qty * this.orderDetail.entries[index].price)
         }
-        this.orderDetail.entries[index].amount = this.orderDetail.entries[index].qty * this.orderDetail.entries[index].price - this.orderDetail.entries[index].deduction
+        this.orderDetail.entries[index].amount = (this.orderDetail.entries[index].qty * this.orderDetail.entries[index].price - this.orderDetail.entries[index].deduction).toFixed(2)
         this.orderDetail.entries[index].discountRate = (this.orderDetail.entries[index].deduction / (this.orderDetail.entries[index].qty * this.orderDetail.entries[index].price) * 100).toFixed(2)
       }
     },
