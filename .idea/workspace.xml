@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/components/Purchase/PurchaseOrderDetail.vue" line="130" />
+    <bookmark url="file://$PROJECT_DIR$/src/components/Purchase/PurchaseOrderDetail.vue" line="139" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="435b2822-8107-46a2-9167-1fc47527f5d2" name="Default" comment="">
@@ -9,7 +9,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/dev.api.js" afterPath="$PROJECT_DIR$/config/dev.api.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/prd.api.js" afterPath="$PROJECT_DIR$/config/prd.api.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Home.vue" afterPath="$PROJECT_DIR$/src/components/Home.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Index.vue" afterPath="$PROJECT_DIR$/src/components/Index.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Purchase/PurchaseOrderDetail.vue" afterPath="$PROJECT_DIR$/src/components/Purchase/PurchaseOrderDetail.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -25,31 +24,17 @@
       <file leaf-file-name="Home.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Home.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
-              <caret line="54" column="52" lean-forward="false" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
+            <state relative-caret-position="1560">
+              <caret line="139" column="70" lean-forward="false" selection-start-line="139" selection-start-column="70" selection-end-line="139" selection-end-column="70" />
               <folding>
                 <element signature="e#371#405#0" expanded="true" />
                 <element signature="e#722#1222#0" expanded="false" />
                 <element signature="e#1243#1437#0" expanded="false" />
-                <element signature="e#2404#3016#0" expanded="false" />
-                <element signature="e#3047#3689#0" expanded="false" />
-                <element signature="e#3713#4198#0" expanded="false" />
-                <element signature="e#4230#4866#0" expanded="false" />
-                <element signature="e#4898#5534#0" expanded="false" />
-                <element signature="e#5560#6052#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Index.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Index.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="505">
-              <caret line="176" column="7" lean-forward="false" selection-start-line="176" selection-start-column="7" selection-end-line="176" selection-end-column="7" />
-              <folding>
-                <element signature="e#573#640#0" expanded="false" />
-                <element signature="e#741#3880#0" expanded="false" />
+                <element signature="e#2507#3364#0" expanded="false" />
+                <element signature="e#3395#4307#0" expanded="false" />
+                <element signature="e#5083#5994#0" expanded="false" />
+                <element signature="e#6688#7425#0" expanded="false" />
+                <element signature="e#7450#8179#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -58,9 +43,12 @@
       <file leaf-file-name="PurchaseOrderDetail.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Purchase/PurchaseOrderDetail.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="103" column="28" lean-forward="false" selection-start-line="103" selection-start-column="28" selection-end-line="103" selection-end-column="28" />
-              <folding />
+            <state relative-caret-position="580">
+              <caret line="28" column="36" lean-forward="false" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
+              <folding>
+                <element signature="e#3163#3234#0" expanded="true" />
+                <element signature="e#3698#5279#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -68,8 +56,8 @@
       <file leaf-file-name="dev.api.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/dev.api.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7">
-              <caret line="28" column="6" lean-forward="true" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
+            <state relative-caret-position="300">
+              <caret line="15" column="4" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -78,8 +66,8 @@
       <file leaf-file-name="prd.api.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/prd.api.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-427">
-              <caret line="6" column="54" lean-forward="false" selection-start-line="6" selection-start-column="54" selection-end-line="6" selection-end-column="54" />
+            <state relative-caret-position="220">
+              <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -98,11 +86,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>searchTextChange</find>
-      <find>SalesOrderList</find>
-      <find>deliver</find>
-      <find>computeDayInterval</find>
-      <find>statusCode</find>
       <find>billStatus</find>
       <find>deliveryDate</find>
       <find>computeBillStatusName</find>
@@ -126,8 +109,13 @@
       <find>this.config.supplierContact</find>
       <find>has fetch</find>
       <find>length</find>
+      <find>) + ' 天'</find>
       <find>items</find>
       <find>console.log(</find>
+      <find>self.warehouse</find>
+      <find>self.currency</find>
+      <find>self.payMethod</find>
+      <find>updateAmountByDisRate</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -177,9 +165,9 @@
         <option value="$PROJECT_DIR$/src/components/Sales/SalesQuoteDetail.vue" />
         <option value="$PROJECT_DIR$/../ERP-PCWeb/mobile/index.html" />
         <option value="$PROJECT_DIR$/src/components/Purchase/PurchaseReturnQuery.vue" />
+        <option value="$PROJECT_DIR$/src/components/Index.vue" />
         <option value="$PROJECT_DIR$/config/dev.api.js" />
         <option value="$PROJECT_DIR$/config/prd.api.js" />
-        <option value="$PROJECT_DIR$/src/components/Index.vue" />
         <option value="$PROJECT_DIR$/src/components/Home.vue" />
         <option value="$PROJECT_DIR$/src/components/Purchase/PurchaseOrderDetail.vue" />
       </list>
@@ -412,7 +400,7 @@
       <workItem from="1517998036330" duration="10112000" />
       <workItem from="1518017506398" duration="281000" />
       <workItem from="1518176851322" duration="485000" />
-      <workItem from="1518177528750" duration="8339000" />
+      <workItem from="1518177528750" duration="15641000" />
     </task>
     <task id="LOCAL-00001" summary="search purchase order ok&#10;need to add function: create and modify">
       <created>1511164347161</created>
@@ -470,11 +458,18 @@
       <option name="project" value="LOCAL" />
       <updated>1518017635809</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="dynamic load assist data">
+      <created>1518185982694</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1518185982694</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81449000" />
+    <option name="totallyTimeSpent" value="88751000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="130" y="0" width="1213" height="1057" extended-state="0" />
@@ -551,7 +546,8 @@
     <MESSAGE value="display purchase order detail ok,&#10;next:&#10;sales quote detail,&#10;sales order detail,&#10;purchase inbound detail,&#10;sales outbound detail,&#10;other inbound detail,&#10;other outbound detail" />
     <MESSAGE value="sales quote detail, sales order detail deploy ok&#10;&#10;purchase inbound detail,&#10;sales outbound detail,&#10;other inbound detail,&#10;other outbound detail" />
     <MESSAGE value="erp edit order detail func" />
-    <option name="LAST_COMMIT_MESSAGE" value="erp edit order detail func" />
+    <MESSAGE value="dynamic load assist data" />
+    <option name="LAST_COMMIT_MESSAGE" value="dynamic load assist data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -697,13 +693,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="20">
           <caret line="1" column="13" lean-forward="false" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Purchase/PurchaseOrderQuery.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="20" column="42" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="42" />
         </state>
       </provider>
     </entry>
@@ -871,6 +860,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Purchase/PurchaseOrderQuery.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="76" column="13" lean-forward="true" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
+          <folding>
+            <element signature="e#2170#2229#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/prd.api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/dev.api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" column="4" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Index.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="505">
@@ -882,45 +897,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/prd.api.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-427">
-          <caret line="6" column="54" lean-forward="false" selection-start-line="6" selection-start-column="54" selection-end-line="6" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/dev.api.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="28" column="6" lean-forward="true" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Home.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="54" column="52" lean-forward="false" selection-start-line="54" selection-start-column="52" selection-end-line="54" selection-end-column="52" />
+        <state relative-caret-position="1560">
+          <caret line="139" column="70" lean-forward="false" selection-start-line="139" selection-start-column="70" selection-end-line="139" selection-end-column="70" />
           <folding>
             <element signature="e#371#405#0" expanded="true" />
             <element signature="e#722#1222#0" expanded="false" />
             <element signature="e#1243#1437#0" expanded="false" />
-            <element signature="e#2404#3016#0" expanded="false" />
-            <element signature="e#3047#3689#0" expanded="false" />
-            <element signature="e#3713#4198#0" expanded="false" />
-            <element signature="e#4230#4866#0" expanded="false" />
-            <element signature="e#4898#5534#0" expanded="false" />
-            <element signature="e#5560#6052#0" expanded="false" />
+            <element signature="e#2507#3364#0" expanded="false" />
+            <element signature="e#3395#4307#0" expanded="false" />
+            <element signature="e#5083#5994#0" expanded="false" />
+            <element signature="e#6688#7425#0" expanded="false" />
+            <element signature="e#7450#8179#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Purchase/PurchaseOrderDetail.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="103" column="28" lean-forward="false" selection-start-line="103" selection-start-column="28" selection-end-line="103" selection-end-column="28" />
-          <folding />
+        <state relative-caret-position="580">
+          <caret line="28" column="36" lean-forward="false" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
+          <folding>
+            <element signature="e#3163#3234#0" expanded="true" />
+            <element signature="e#3698#5279#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

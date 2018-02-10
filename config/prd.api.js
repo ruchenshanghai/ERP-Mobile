@@ -4,11 +4,12 @@ let APIUri = {
     ShippingMethodURL: '/index.php/api/AssistData/ShippingMethod',
     AccountURL: '/index.php/api/AssistData/Account',
     ContactURL: '/index.php/api/AssistData/Contact',
-    WarehouseURL: '/index.php/api/AssistData/Warehouse',
     ContactConfig: {
       CustomerType: -10,
       SupplierType: 10
-    }
+    },
+    WarehouseURL: '/index.php/api/AssistData/Warehouse',
+    CurrencyURL: '/index.php/api/AssistData/Currency'
   },
   Staff: {
     validateURL: '/index.php/api/Staff/validate'

@@ -72,6 +72,9 @@
             case 'Warehouse':
               promiseArray.push(this.fetchWarehouse())
               break
+            case 'Currency':
+              promiseArray.push(this.fetchCurrency())
+              break
           }
         }
         Promise.all(promiseArray).then(result => {
@@ -90,6 +93,10 @@
               }
             }).then(res => {
               this.config.PayMethod = res.data.info.items
+              for (let index in this.config.PayMethod) {
+                this.config.PayMethod[index].key = this.config.PayMethod[index].name
+                this.config.PayMethod[index].value = this.config.PayMethod[index].name
+              }
               resolve('fetch pay method')
             })
           } else {
@@ -109,6 +116,10 @@
               }
             }).then(res => {
               this.config.ShippingMethod = res.data.info.items
+              for (let index in this.config.ShippingMethod) {
+                this.config.ShippingMethod[index].key = this.config.ShippingMethod[index].name
+                this.config.ShippingMethod[index].value = this.config.ShippingMethod[index].name
+              }
               resolve('fetch shipping method')
             })
           } else {
@@ -124,6 +135,10 @@
               password: this.user.password
             }).then(res => {
               this.config.Account = res.data.info.items
+              for (let index in this.config.Account) {
+                this.config.Account[index].key = this.config.Account[index].name
+                this.config.Account[index].value = this.config.Account[index].name
+              }
               resolve('fetch account')
             })
           } else {
@@ -142,6 +157,10 @@
               }
             }).then(res => {
               this.config.SupplierContact = res.data.info.rows
+              for (let index in this.config.SupplierContact) {
+                this.config.SupplierContact[index].key = this.config.SupplierContact[index].name
+                this.config.SupplierContact[index].value = this.config.SupplierContact[index].name
+              }
               resolve('fetch supplier contact')
             })
           } else {
@@ -175,10 +194,33 @@
               password: this.user.password
             }).then(res => {
               this.config.Warehouse = res.data.info.rows
+              for (let index in this.config.Warehouse) {
+                this.config.Warehouse[index].key = this.config.Warehouse[index].name
+                this.config.Warehouse[index].value = this.config.Warehouse[index].name
+              }
               resolve('fetch warehouse')
             })
           } else {
             resolve('has fetched warehouse')
+          }
+        })
+      },
+      fetchCurrency () {
+        return new Promise((resolve, reject) => {
+          if (this.config.Account.length === 0) {
+            this.$http.post(this.config.AssistData.CurrencyURL, {
+              userName: this.user.userName,
+              password: this.user.password
+            }).then(res => {
+              this.config.Currency = res.data.info.items
+              for (let index in this.config.Currency) {
+                this.config.Currency[index].key = this.config.Currency[index].name
+                this.config.Currency[index].value = this.config.Currency[index].name
+              }
+              resolve('fetch currency')
+            })
+          } else {
+            resolve('has fetched currency')
           }
         })
       }
