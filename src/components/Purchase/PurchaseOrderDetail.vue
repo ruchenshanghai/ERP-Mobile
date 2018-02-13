@@ -57,21 +57,41 @@
             <x-input type="number" v-model="item.deduction" @on-blur="updateDetailAmountByDeduction($index)"></x-input>
           </grid-item>
         </grid>
-        <x-input title="采购金额" type="number" v-model="item.amount" readonly></x-input>
+        <x-input :title="'采购金额' + ' #' + ($index + 1)" type="number" v-model="item.amount" readonly></x-input>
+        <x-input title="订单备注" v-model="item.description" placeholder="请输入该商品的备注"></x-input>
       </group>
     </template>
+    <x-button type="primary" @click.native="addNewDetail">新增详情</x-button>
+    <flexbox id="flex-margin">
+      <template v-if="this.orderDetail.checked === 0">
+        <flexbox-item>
+          <x-button type="default" @click.native="checkInOrder">审核</x-button>
+        </flexbox-item>
+      </template>
+      <template v-else>
+        <flexbox-item>
+          <x-button type="default" @click.native="checkOutOrder">反审核</x-button>
+        </flexbox-item>
+      </template>
+    <flexbox-item>
+      <x-button type="primary" @click.native="updateOrder">更新</x-button>
+    </flexbox-item>
+    <flexbox-item>
+      <x-button type="warn" @click.native="deleteOrder">删除</x-button>
+    </flexbox-item>
+  </flexbox>
   </div>
 
 </template>
 
 <script>
-  import { Group, Grid, GridItem, Selector, Datetime, XInput, XButton } from 'vux'
+  import { Group, Grid, GridItem, Selector, Datetime, XInput, XButton, Flexbox, FlexboxItem } from 'vux'
   import parseFunction from '../../utils/parseText'
 
   export default {
     name: 'purchase-order-detail',
     directives: {},
-    components: { Group, Grid, GridItem, Selector, Datetime, XInput, XButton },
+    components: { Group, Grid, GridItem, Selector, Datetime, XInput, XButton, Flexbox, FlexboxItem },
     data () {
       return {
         orderDetail: {},
@@ -116,14 +136,21 @@
             return
           }
           self.orderDetail = orderRes.info
-//          self.orderDetail.paymentMethod = parseFunction.getNameByID(self.payMethod, self.orderDetail.paymentMethod)
-//          self.orderDetail.shippingMethod = parseFunction.getNameByID(self.shippingMethod, self.orderDetail.shippingMethod)
-//          self.orderDetail.account = parseFunction.getNameByID(self.account, self.orderDetail.accId)
           this.parseOrderDetailInventory()
         })
       })
     },
     methods: {
+      parseOrderDetailInventory () {
+        for (let index in this.orderDetail.entries) {
+          for (let i = 0; i < this.inventory.length; i++) {
+            if (this.inventory[i].number === this.orderDetail.entries[index].invNumber) {
+              this.orderDetail.entries[index].inventory = this.inventory[i]
+              break
+            }
+          }
+        }
+      },
       updateAmountByDisRate (val) {
         if (val > 100) {
           this.orderDetail.disRate = 100
@@ -138,15 +165,14 @@
         this.orderDetail.amount = (this.orderDetail.totalAmount - this.orderDetail.disAmount).toFixed(2)
         this.orderDetail.disRate = (this.orderDetail.disAmount / this.orderDetail.totalAmount * 100).toFixed(2)
       },
-      parseOrderDetailInventory () {
+      updateAmountByDetail () {
+        this.orderDetail.totalAmount = 0
         for (let index in this.orderDetail.entries) {
-          for (let i = 0; i < this.inventory.length; i++) {
-            if (this.inventory[i].number === this.orderDetail.entries[index].invNumber) {
-              this.orderDetail.entries[index].inventory = this.inventory[i]
-              break
-            }
-          }
+          console.log(this.orderDetail.entries[index].amount)
+          this.orderDetail.totalAmount = Number(this.orderDetail.totalAmount) + Number(this.orderDetail.entries[index].amount)
         }
+        this.orderDetail.disAmount = (this.orderDetail.totalAmount * this.orderDetail.disRate / 100).toFixed(2)
+        this.orderDetail.amount = (this.orderDetail.totalAmount - this.orderDetail.disAmount).toFixed(2)
       },
       updateInventory () {
         for (let item in this.orderDetail.entries) {
@@ -165,6 +191,7 @@
       updateDetailAmount (index) {
         this.orderDetail.entries[index].deduction = (this.orderDetail.entries[index].price * this.orderDetail.entries[index].qty * this.orderDetail.entries[index].discountRate / 100).toFixed(2)
         this.orderDetail.entries[index].amount = (this.orderDetail.entries[index].price * this.orderDetail.entries[index].qty - this.orderDetail.entries[index].deduction).toFixed(2)
+        this.updateAmountByDetail()
       },
       updateDetailAmountByDisRate (index) {
         if (this.orderDetail.entries[index].discountRate > 100) {
@@ -172,6 +199,7 @@
         }
         this.orderDetail.entries[index].deduction = (this.orderDetail.entries[index].qty * this.orderDetail.entries[index].price * this.orderDetail.entries[index].discountRate / 100).toFixed(2)
         this.orderDetail.entries[index].amount = (this.orderDetail.entries[index].qty * this.orderDetail.entries[index].price - this.orderDetail.entries[index].deduction).toFixed(2)
+        this.updateAmountByDetail()
       },
       updateDetailAmountByDeduction (index) {
         if (this.orderDetail.entries[index].deduction > (this.orderDetail.entries[index].qty * this.orderDetail.entries[index].price)) {
@@ -179,6 +207,53 @@
         }
         this.orderDetail.entries[index].amount = (this.orderDetail.entries[index].qty * this.orderDetail.entries[index].price - this.orderDetail.entries[index].deduction).toFixed(2)
         this.orderDetail.entries[index].discountRate = (this.orderDetail.entries[index].deduction / (this.orderDetail.entries[index].qty * this.orderDetail.entries[index].price) * 100).toFixed(2)
+        this.updateAmountByDetail()
+      },
+      addNewDetail () {
+        let tempNewEntry = {
+          invId: 87,
+          price: 0,
+          qty: 0,
+          discountRate: 0,
+          deduction: 0,
+          amount: 0,
+          inventory: this.inventory[0],
+          description: ''
+        }
+        this.orderDetail.entries.push(tempNewEntry)
+      },
+      updateOrder () {
+        console.log('update')
+        const self = this
+        let postData = {}
+        postData.userName = self.user.userName
+        postData.password = self.user.password
+        postData.updateConfig = self.orderDetail
+        for (let index in postData.updateConfig.entries) {
+          postData.updateConfig.entries[index].invNumber = postData.updateConfig.entries[index].inventory.number
+          postData.updateConfig.entries[index].invName = postData.updateConfig.entries[index].inventory.name
+          postData.updateConfig.entries[index].invSpec = postData.updateConfig.entries[index].inventory.spec
+          postData.updateConfig.entries[index].mainUnit = postData.updateConfig.entries[index].inventory.unitName
+          postData.updateConfig.entries[index].locationId = postData.updateConfig.entries[index].inventory.locationId
+          postData.updateConfig.entries[index].locationName = postData.updateConfig.entries[index].inventory.locationName
+        }
+        self.$http.post(self.config.Purchase.PurchaseOrder.updateURL, postData).then(orderRes => {
+          orderRes = orderRes.data
+          if (!orderRes.status) {
+            self.$router.push('Index')
+            return
+          }
+          console.log(JSON.stringify(orderRes.data))
+        })
+      },
+      checkInOrder () {
+        console.log('check in')
+      },
+      checkOutOrder () {
+        console.log('check out')
+      },
+      deleteOrder () {
+        console.log('delete')
       }
     },
     computed: {},
@@ -190,5 +265,8 @@
   .grid-order {
     text-align: center;
     margin-bottom: 20px;
+  }
+  #flex-margin {
+    margin-top: 10px;
   }
 </style>

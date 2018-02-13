@@ -19,7 +19,8 @@ let APIUri = {
   Purchase: {
     PurchaseOrder: {
       fetchURL: '/index.php/api/PurchaseOrder/fetch',
-      detailURL: '/index.php/api/PurchaseOrder/detail'
+      detailURL: '/index.php/api/PurchaseOrder/detail',
+      updateURL: '/index.php/api/PurchaseOrder/update'
     },
     PurchaseReturn: {
       fetchURL: '/index.php/api/PurchaseReturn/fetch'
