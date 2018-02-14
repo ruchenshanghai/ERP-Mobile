@@ -136,7 +136,7 @@
             }).then(res => {
               this.config.Currency = res.data.info.items
               for (let index in this.config.Currency) {
-                this.config.Currency[index].key = this.config.Currency[index].name
+                this.config.Currency[index].key = this.config.Currency[index].id
                 this.config.Currency[index].value = this.config.Currency[index].name
               }
               resolve('fetch currency')

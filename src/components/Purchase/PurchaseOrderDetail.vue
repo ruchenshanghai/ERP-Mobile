@@ -1,10 +1,14 @@
 <template>
 
-  <div>
+  <div
+    v-loading="loadingStatus"
+    element-loading-text="拼命加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)">
     <group :title="'订单编号: ' + orderDetail.billNo">
       <selector title="供应商" v-model="orderDetail.contactName" :options="supplierContact"></selector>
       <selector title="收货仓库" v-model="orderDetail.locationId" :options="warehouse"></selector>
-      <selector title="币种" v-model="orderDetail.currencyText" :options="currency"></selector>
+      <selector title="币种" v-model="orderDetail.currency" :options="currency"></selector>
       <selector title="支付方式" v-model="orderDetail.paymentMethod" :options="payMethod"></selector>
       <selector title="收货方式" v-model="orderDetail.shippingMethod" :options="shippingMethod"></selector>
       <selector title="结算账户" v-model="orderDetail.accId" :options="account"></selector>
@@ -94,6 +98,7 @@
     components: { Group, Grid, GridItem, Selector, Datetime, XInput, XButton, Flexbox, FlexboxItem },
     data () {
       return {
+        loadingStatus: true,
         orderDetail: {},
         parseFunction: parseFunction,
         supplierContact: [],
@@ -108,6 +113,7 @@
     },
     created () {
       const self = this
+      self.loadingStatus = true
       let assistParams = ['PayMethod', 'ShippingMethod', 'Account', 'SupplierContact', 'CustomerContact', 'Warehouse', 'Currency', 'Inventory', 'Unit']
       self.$emit('resAssistData', assistParams, resData => {
         self.supplierContact = self.config.SupplierContact
@@ -136,7 +142,8 @@
             return
           }
           self.orderDetail = orderRes.info
-          this.parseOrderDetailInventory()
+          self.parseOrderDetailInventory()
+          self.loadingStatus = false
         })
       })
     },
@@ -222,6 +229,58 @@
         }
         this.orderDetail.entries.push(tempNewEntry)
       },
+      makeUpUpdatePostData () {
+        let postEntries = { }
+        let totalQty = 0
+        for (let index in this.orderDetail.entries) {
+          totalQty += Number(this.orderDetail.entries[index].qty)
+          let tempObj = {
+            invId: this.orderDetail.entries[index].invId,
+            invNumber: this.orderDetail.entries[index].inventory.number,
+            invName: this.orderDetail.entries[index].inventory.name,
+            invSpec: this.orderDetail.entries[index].inventory.spec,
+            skuId: this.orderDetail.entries[index].inventory.unitId ? this.orderDetail.entries[index].inventory.unitId : -1,
+            skuName: '',
+            unitId: this.orderDetail.entries[index].inventory.unitId,
+            mainUnit: this.orderDetail.entries[index].inventory.unitName,
+            qty: this.orderDetail.entries[index].qty,
+            price: this.orderDetail.entries[index].price,
+            discountRate: this.orderDetail.entries[index].discountRate,
+            deduction: this.orderDetail.entries[index].deduction,
+            amount: this.orderDetail.entries[index].amount,
+            description: this.orderDetail.entries[index].description,
+            locationId: this.orderDetail.entries[index].inventory.locationId,
+            locationName: this.orderDetail.entries[index].inventory.locationName
+          }
+          postEntries.push(tempObj)
+        }
+        let postData = {
+          id: this.orderDetail.id,
+          buId: this.orderDetail.buId,
+          contactName: this.orderDetail.contactName,
+          date: this.orderDetail.date,
+          deliveryDate: this.orderDetail.deliveryDate,
+          locationId: this.orderDetail.locationId,
+          billNo: this.orderDetail.billNo,
+          transType: this.orderDetail.transType,
+          entries: postEntries,
+          totalQty: totalQty,
+          totalAmount: this.orderDetail.totalAmount,
+          description: this.orderDetail.description,
+          disRate: this.orderDetail.disRate,
+          disAmount: this.orderDetail.disAmount,
+          amount: this.orderDetail.amount,
+          paymentMethod: this.orderDetail.paymentMethond,
+          shippingMethod: this.orderDetail.shippingMethod
+        }
+        for (let index in this.currency) {
+          if (this.currenc[index].name === this.orderDetail.currencyText) {
+            postData.currency = this.currenc[index].id
+            break
+          }
+        }
+        return postData
+      },
       updateOrder () {
         console.log('update')
         const self = this
@@ -229,7 +288,10 @@
         postData.userName = self.user.userName
         postData.password = self.user.password
         postData.updateConfig = self.orderDetail
+        postData.updateConfig.totalQty = 0
+        postData.updateConfig.modifyTime = new Date().toLocaleString()
         for (let index in postData.updateConfig.entries) {
+          postData.updateConfig.totalQty += Number(postData.updateConfig.entries[index].qty)
           postData.updateConfig.entries[index].invNumber = postData.updateConfig.entries[index].inventory.number
           postData.updateConfig.entries[index].invName = postData.updateConfig.entries[index].inventory.name
           postData.updateConfig.entries[index].invSpec = postData.updateConfig.entries[index].inventory.spec
@@ -237,6 +299,7 @@
           postData.updateConfig.entries[index].locationId = postData.updateConfig.entries[index].inventory.locationId
           postData.updateConfig.entries[index].locationName = postData.updateConfig.entries[index].inventory.locationName
         }
+        console.log(JSON.stringify(postData))
         self.$http.post(self.config.Purchase.PurchaseOrder.updateURL, postData).then(orderRes => {
           orderRes = orderRes.data
           if (!orderRes.status) {
