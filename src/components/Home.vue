@@ -12,7 +12,7 @@
 
 <script>
   import vHeader from './Header.vue'
-  import apiConfig from '../../config/prd.api'
+  import apiConfig from '../../config/dev.api'
 
   export default {
     data () {

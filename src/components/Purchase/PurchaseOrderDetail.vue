@@ -175,7 +175,7 @@
       updateAmountByDetail () {
         this.orderDetail.totalAmount = 0
         for (let index in this.orderDetail.entries) {
-          console.log(this.orderDetail.entries[index].amount)
+//          console.log(this.orderDetail.entries[index].amount)
           this.orderDetail.totalAmount = Number(this.orderDetail.totalAmount) + Number(this.orderDetail.entries[index].amount)
         }
         this.orderDetail.disAmount = (this.orderDetail.totalAmount * this.orderDetail.disRate / 100).toFixed(2)
@@ -196,6 +196,7 @@
         }
       },
       updateDetailAmount (index) {
+        this.orderDetail.entries[index].qty = Number(this.orderDetail.entries[index].qty)
         this.orderDetail.entries[index].deduction = (this.orderDetail.entries[index].price * this.orderDetail.entries[index].qty * this.orderDetail.entries[index].discountRate / 100).toFixed(2)
         this.orderDetail.entries[index].amount = (this.orderDetail.entries[index].price * this.orderDetail.entries[index].qty - this.orderDetail.entries[index].deduction).toFixed(2)
         this.updateAmountByDetail()
@@ -230,7 +231,7 @@
         this.orderDetail.entries.push(tempNewEntry)
       },
       makeUpUpdatePostData () {
-        let postEntries = { }
+        let postEntries = []
         let totalQty = 0
         for (let index in this.orderDetail.entries) {
           totalQty += Number(this.orderDetail.entries[index].qty)
@@ -271,13 +272,9 @@
           disAmount: this.orderDetail.disAmount,
           amount: this.orderDetail.amount,
           paymentMethod: this.orderDetail.paymentMethond,
-          shippingMethod: this.orderDetail.shippingMethod
-        }
-        for (let index in this.currency) {
-          if (this.currenc[index].name === this.orderDetail.currencyText) {
-            postData.currency = this.currenc[index].id
-            break
-          }
+          shippingMethod: this.orderDetail.shippingMethod,
+          currency: this.orderDetail.currency,
+          accId: this.orderDetail.accId
         }
         return postData
       },
@@ -287,19 +284,19 @@
         let postData = {}
         postData.userName = self.user.userName
         postData.password = self.user.password
-        postData.updateConfig = self.orderDetail
-        postData.updateConfig.totalQty = 0
-        postData.updateConfig.modifyTime = new Date().toLocaleString()
-        for (let index in postData.updateConfig.entries) {
-          postData.updateConfig.totalQty += Number(postData.updateConfig.entries[index].qty)
-          postData.updateConfig.entries[index].invNumber = postData.updateConfig.entries[index].inventory.number
-          postData.updateConfig.entries[index].invName = postData.updateConfig.entries[index].inventory.name
-          postData.updateConfig.entries[index].invSpec = postData.updateConfig.entries[index].inventory.spec
-          postData.updateConfig.entries[index].mainUnit = postData.updateConfig.entries[index].inventory.unitName
-          postData.updateConfig.entries[index].locationId = postData.updateConfig.entries[index].inventory.locationId
-          postData.updateConfig.entries[index].locationName = postData.updateConfig.entries[index].inventory.locationName
-        }
-        console.log(JSON.stringify(postData))
+        postData.updateConfig = self.makeUpUpdatePostData()
+//        postData.updateConfig.totalQty = 0
+//        postData.updateConfig.modifyTime = new Date().toLocaleString()
+//        for (let index in postData.updateConfig.entries) {
+//          postData.updateConfig.totalQty += Number(postData.updateConfig.entries[index].qty)
+//          postData.updateConfig.entries[index].invNumber = postData.updateConfig.entries[index].inventory.number
+//          postData.updateConfig.entries[index].invName = postData.updateConfig.entries[index].inventory.name
+//          postData.updateConfig.entries[index].invSpec = postData.updateConfig.entries[index].inventory.spec
+//          postData.updateConfig.entries[index].mainUnit = postData.updateConfig.entries[index].inventory.unitName
+//          postData.updateConfig.entries[index].locationId = postData.updateConfig.entries[index].inventory.locationId
+//          postData.updateConfig.entries[index].locationName = postData.updateConfig.entries[index].inventory.locationName
+//        }
+//        console.log(JSON.stringify(postData))
         self.$http.post(self.config.Purchase.PurchaseOrder.updateURL, postData).then(orderRes => {
           orderRes = orderRes.data
           if (!orderRes.status) {
